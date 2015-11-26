@@ -12,9 +12,17 @@
 
 ## Basic quantities
 * node `i`
-* **membership number** `m_i` ... number of communities the node belongs to
+* **membership number** `m_i` ... number of communities the node `i` belongs to
 * any two communities `A` and `B` can share `s_ov` nodes ... **overlap size** between these communities
 * communities constitute a network (each community is a node, links are overlaps)
 * **community degree** of a community is called `d` ... number of such links
 * **size of community** `s_com` is defined as number of its nodes
 * to characterize community structure of network we introduce the distribution of these four basic quantities
+
+## Cummulative distribution functions
+* `P(m)` ... number of communities a node belongs to (membership number)
+* `P(s_ov)` ... number of nodes two communities share (overlap size)
+* `P(d_com)` ... degree of a community-node (communiy degree)
+* `P(s_com)` ... size of community (communiy size)
+
+## 
