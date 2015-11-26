@@ -11,4 +11,4 @@
 * has never been studies for large networks
 
 # Basic quantities
-* node $i$
+* node $$i$$
