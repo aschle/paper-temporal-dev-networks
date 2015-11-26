@@ -15,3 +15,6 @@
 ## Network Characteristics (local structure)
 * co-authorship: dense network, overlap between communities, long term collaboration process
 * cell-phone: less interconected, seperated by inter-community nodes/edges, instant communication
+
+## Method
+* communities were extracted using the clique persolation method ... 
