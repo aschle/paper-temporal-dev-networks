@@ -40,3 +40,17 @@
 * clique percolation
 * divisive method (cut network in smaller and smaller pices)
 * agglomerative method (do same as divisive but reverse order)
+
+## `k` and `w*`
+* `k` size of clique and `w*` is a treshhold for edge weights
+* goal is to find a giant component
+* for each `k={3,4,5,6}` the treshhold `w*` is lowered until the largest community becomes twice as big as the second largest one
+* `f*` is fraction of links stronger than `w*`
+* choose only values for `k` for which `f*` is not too small (not smaller than 0.5)
+* -> `k = 6 | 5` with `f* = 0.93 | 0.75` for collaboration networks
+
+## Analyzing distribution of the 4 properties
+* **Community size** follows a power law
+* **Community degree** not following power law: exponential + power law tail
+* **Overlap size** follows power law
+* **Membership Number** close to powr law
