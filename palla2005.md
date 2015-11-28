@@ -35,3 +35,8 @@
 ** required to be local
 ** should not contain any cut-link or cut-node
 ** should allow overlaps
+
+## Methods for finding communities
+* clique percolation
+* divisive method (cut network in smaller and smaller pices)
+* agglomerative method (do same as divisive but reverse order)
