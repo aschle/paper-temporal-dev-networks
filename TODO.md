@@ -12,11 +12,18 @@
 * *Derényi, Imre, Gergely Palla, and Tamás Vicsek. "Clique percolation in random networks." Physical review letters 94.16 (2005): 160202.*
 * [http://cfinder.org/pmwiki/papers/cliquePercolation.pdf](http://cfinder.org/pmwiki/papers/cliquePercolation.pdf)
 
-# Methods finding communities
+# Algorithms for finding communities
+* Minimum-cut method (*Detecting community structure in networks*, Newman, 2005)
+* Hierarchical clustering
+* Girvan–Newman algorithm (*Community structure in social and biological networks*, Newman, 2002)
+* Modularity maximization
+* Statistical inference
+* Clique based methods
+* http://stackoverflow.com/questions/9471906/what-are-the-differences-between-community-detection-algorithms-in-igraph/
 
 ## Community structure in social and biological networks (Divisive method)
 * *Girvan, Michelle, and Mark EJ Newman. "Community structure in social and biological networks." Proceedings of the national academy of sciences 99.12 (2002): 7821-7826.*
-* Girvan–Newman algorithm
+* Girvan–Newman algorithm (divisive)
 * [http://www.pnas.org/content/99/12/7821.full.pdf](http://www.pnas.org/content/99/12/7821.full.pdf)
 
 
