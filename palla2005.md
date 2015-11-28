@@ -24,5 +24,8 @@
 * `P(s_ov)` ... number of nodes two communities share (overlap size)
 * `P(d_com)` ... degree of a community-node (communiy degree)
 * `P(s_com)` ... size of community (communiy size)
+* `P(s_ov)` means  the proportion of thos overlaps that are larger than `s_ov`
 
-## 
+## Formal definition of community
+* a typical community consists of several complete (fully connected) subgraphs that tend to share many of their nodes
+* **`k`-clique community:** union of all `k`-cliques (complete subgraph of size `k`) that can be reached from each other through a series of adjacent `k`-cliques (where adjacency means sharing `k-1` nodes)
