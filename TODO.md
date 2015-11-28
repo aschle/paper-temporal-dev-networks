@@ -15,10 +15,11 @@
 # Methods finding communities
 
 ## Community structure in social and biological networks (Divisive method)
-* **Girvan, Michelle, and Mark EJ Newman. "Community structure in social and biological networks." Proceedings of the national academy of sciences 99.12 (2002): 7821-7826.**
+* *Girvan, Michelle, and Mark EJ Newman. "Community structure in social and biological networks." Proceedings of the national academy of sciences 99.12 (2002): 7821-7826.*
+* Girvan–Newman algorithm
 * [http://www.pnas.org/content/99/12/7821.full.pdf](http://www.pnas.org/content/99/12/7821.full.pdf)
 
 
 ## Fast algorithm for detecting community structure in networks (Agglomerative method) (*)
-* **Newman, Mark EJ. "Fast algorithm for detecting community structure in networks." Physical review E 69.6 (2004): 066133.**
+* *Newman, Mark EJ. "Fast algorithm for detecting community structure in networks." Physical review E 69.6 (2004): 066133.*
 * [http://grid.cs.gsu.edu/~myan2/communitydetection/1.pdf](http://grid.cs.gsu.edu/~myan2/communitydetection/1.pdf)
