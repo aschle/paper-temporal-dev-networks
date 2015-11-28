@@ -29,3 +29,9 @@
 ## Formal definition of community
 * a typical community consists of several complete (fully connected) subgraphs that tend to share many of their nodes
 * **`k`-clique community:** union of all `k`-cliques (complete subgraph of size `k`) that can be reached from each other through a series of adjacent `k`-cliques (where adjacency means sharing `k-1` nodes)
+* Basic requirement:
+** it cannot be too restrictive
+** should be based on density of links
+** required to be local
+** should not contain any cut-link or cut-node
+** should allow overlaps
