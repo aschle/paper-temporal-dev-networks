@@ -31,9 +31,9 @@
 * developed method for matching subsequent states of evolving communities for relatively distant points in time
 
 ## Definitions: size, age, auto-correlation, stationarity
-* basic quantities for characterizing a community: **size** ´s´, **age* ´T´ (time passed since birth)
+* basic quantities for characterizing a community: **size** ´s´, **age** ´T´ (time passed since birth)
 * `s` and `T` are positivley correlated: larger communities are on average older
-* auto-correlation function, to quantify the overlap between to states of the same community `A(t)` at `t` timesteps apart
+* **auto-correlation** function, to quantify the **overlap** between to states of the same community `A(t)` at `t` timesteps apart
 * collaboration networks are more *dynamic*
 * decays faster for larger communities (membership of larger communities is changing at a high rate
 * in contrast smaller communities change at smaller rate (composition more or less static)
