@@ -39,5 +39,18 @@
 * in contrast smaller communities change at smaller rate (composition more or less static)
 * define average correlation between subsequent states (**stationarity**) for a community
 
-## Headline
-* 
+## Relatiionship between above (Stability rules)
+* relationship between **lifetime** `T*` (steps between birth and disintegration), stationarity and community size
+* lifetime = measure for fitness
+* small communities it is optimal to have static, timeindependant membership
+* large communities better to have continually changing membership
+
+## Future of communities
+* could the inspection of a community itselfe predict its future?
+* for each member measured total weight of this members connections to outside of the community `w_out` and members belonging to community `w_in` **commitment**
+* probability that a member will abandon the community: `w_out / (w_in + w_out)`
+* if relative commitment of users to individuals outside a given community is higher, then it is more likely that he/she leaves the community
+* those with least commitment have quickly growing likelihood of leaving the community
+* measured the same things for the whole community as total weights `W_out` and `W_in`
+* probability for a community to disintegrate in next step increases as a function `W_out / (W_in + W_out)` and lifetime decreases for large `W_out / (W_in + W_out)` ratios
+* these results suggest that tracking of individuals and community commitment to members provides a clue for pedicting communities fate
