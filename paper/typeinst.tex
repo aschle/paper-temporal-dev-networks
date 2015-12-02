@@ -76,35 +76,43 @@ contain at least 70 and at most 150 words.
 \end{abstract}
 
 \section{Introduction}
-introduction to the topic\\
-why i am doing this\\
-motivation\\
-research question\\
-limitations with my dataset\\
-goal of the paper\\
+introduction to the topic, scientific collaboration, co-authorship networks, social networks\\
+motivation: dataset, already constructed co-authorship network, based on very simple modeling of collaboration, self constructed trashhold\\
+research question: how do communities within co-authorship networks evolve over time? in geochemistry people often focus on one isotope system, and stick to this topic. do researchers in geochemistry really focus on one topic or do they change the field over time? why do they change field and were do they change to? by analysing the network over time this question could be answered maybe\\
+goal of the paper of the paper is to find an appropriate method for analysing scientific collaboration networks over time\\
 
 \section{Related Work}
-what areas belong to related work, what is covered here
-other papers doing the same as I want to do
-community detection and temporal aspects of network analysis
+community detection in complex and large graphs\\
+different methods of community detection algorithms\\
+communities in collaboration networks (co-authorship)\\
+temporal aspects of communities\\
+time slicing and dividing the network into snapshots\\
+algorithms and implementations\\
+focus not on different time slicing methods but more on community detection\\
+references to temporal stuff [TODO cite moody]
 
 \subsection{Sientific collaboration}
-TODO, why is this important
+TODO definition [TODO cite]\\
+based on who borad or narrow the definition of collaboration is, a function/measurement for edgeweight can be chosen
 
 \subsection{Co-Authorship Network}
-short summary networks, social networks, SNA, co-authorship networks, references to who studied those networks
+short summary networks, social networks, SNA, co-authorship networks\\
+references to who studied those networks [Newmann and Barabasi] just references\\
+nodes are authors, links are collaboration, wights for nodes and edges\\
 
 \subsection{Communities in Social Networks}
-Definition of communities\\
+Definition of communities, there is no proper definition yet\\
 \cite{girvan2002community}\\
 \url{http://www.ams.org/notices/200909/rtx090901082p.pdf}\\
 \cite{palla2005uncovering}\\
 \cite{fortunato2010community}\\
 \url{https://en.wikipedia.org/wiki/Community_structure}
+most real world networks contain parts in which nodes are more highly conected to each other than to the rest of the network, those sets are usually called clusters, communities, cohesive groups or modeuls [TODO cite], they have no wiedely accepted unique definition. the detection algorithms mainly define what a community is.
 
 \subsubsection{Community Detection Algorithms in General}
 [TODO short summary with further readings]
 maybe short classification of algorithms from~\cite{fortunato2010community}\\
+maybe there are so many aproaches\\
 divisive and agglomerative methos\\
 
 \subsubsection{Detecting Overlapping Communities}
@@ -123,10 +131,10 @@ Clique percolation method (CPM) is used to identify overlapping communities in n
 The commmunity definition used in the paper relies on the fact that a community consists of fully connected subgraphs (\emph{cliques}), that share many nodes. \emph{$k$-cliques} are fully connected subgraphs with $k$ nodes. A community in this context is called a \emph{$k$-clique-community}, which is defined as a union of all $k$-cliques, which can be reached from each other through a number of \emph{adjacent $k$-cliques}. Two $k$-cliques are called adjacent if they share $k-1$ nodes. An example can be seen in figure [TODO image $k$-clique and $k$-clique-community].
 
 \subsection{Construction of the co-authorship network}
-TODO, how are weights calculated in this network, what is a collaboration here.
+TODO, how are weights calculated in this network, what is a collaboration here. $n/(n-1)$ with $n$ auhors for one publication
 
 \subsection{Algorithm}
-Based on the explained community definition the algorithm consists of the following steps, which will be explained in more detail. [TODO an example of a graph in each step of the algorithm can be seen in figure X]. The starting point for the algorithm is a undirected unweighted graph. In section \ref{cpm-construction} we talk about generating an unweighted collaboration, co-authorship graph.
+Based on the explained community definition the algorithm consists of the following steps, which will be explained in more detail. [TODO an example of a graph in each step of the algorithm can be seen in figure X]. The starting point for the algorithm is a undirected unweighted graph. In section \ref{cpm-construction} we talk about generating an unweighted collaboration, co-authorship graph using a treshhold.
 
 \begin{enumerate}
 \item Find all \emph{maximal cliques}, these are cliques that are not part of larger cliques.
@@ -160,23 +168,24 @@ Looking at the binary matrix (or resulting graph) we just need to look for conne
 
 \subsection{Construction of the network and Details on $k$ \& $w^*$ for co-authorship networks}
 \label{cpm-construction}
-also talk about choosing the right k and the rigth trashhold. Calculation of link weights $1/(n-1)$, with $n$ number of authors per paper. Treshold $w^*$ for link weights. This is how collaboration is weighted or defined.
+talk about choosing the right $k$ and the rigth trashhold $w^*$. Calculation of link weights $1/(n-1)$, with $n$ number of authors per paper. Treshold $w^*$ for link weights. This is how collaboration is weighted or defined. all links smaller than $w^*$ are removed.\\
+how to chose the right $k$, usually between $3$ and $6$, then $w^*$ is ajusted\\
 
 \subsection{Summary of variables an measured statistics}
 Maybe important what should I measure in my network.
+those measurement describe the quality of those detected communities\\
+summary of variable\\
 
-[TODO what $k$ to choose]
 
 \subsection{Main Findings of the paper}
-Overlaps in networks are significant. The distributions introduced in the paper (community size, community degree, overlap size, membership number) reveal universal features of networks. The network of communities has non-trivial correlations and specific scaling properties. Providing a tool with which to enterprete the inner organisation of large networks.
+Overlaps in networks are significant. The distributions introduced in the paper (community size, community degree, overlap size, membership number) reveal universal features of networks. The network of communities has non-trivial correlations and specific scaling properties. Providing a tool with which to enterprete the inner organisation of large networks.[TODO cite]
 
 \section{Community Evolution based in CPM}
 \label{evolution}
 Palla et.~al developed \cite{palla2007quantifying} in 2007 an algorithm based on clique percolation that allows us to investigate the time dependance of overlapping communities on a large scale, thus uncovering basic relationships characterizing community evolution.
-sumary
 
 \subsection{Construction of the time dependant networks}
-Event in the network are paper publications. Social connection between people start before event and lastet for some time after the event, the higher the fequency the closer the relationship[TODO citeSocial intertia in collaboration networks, Ramosco and Morris 2006]
+Event in the network are paper publications. Social connection between people start before event and last for some time after the event, the higher the fequency the closer the relationship[TODO citeSocial intertia in collaboration networks, Ramosco and Morris 2006]
 
 Weight is $n/(n-1)$ for each paper and its collaborators.
 The \emph{link weight} between to nodes $a$ and $b$ at a certain time $t$ is calculated as
@@ -192,14 +201,20 @@ here in the co-authorship network $k=3, w^*=1.0$ is used.
 what are the time steps for co-author network [TODO find out read again]
 
 \subsection{Algorithm}
-The algorithm uses the clique percolation method to find communities in each time depandent graph. The starting point is set of an undirected and unweighted  graphs for each timestep (snapshots usually called in other papers)
+The algorithm uses the clique percolation method to find communities in each time depandent graph. The starting point is set of an undirected and unweighted  graphs for each timestep (snapshots usually called in other papers).
 
 \begin{enumerate}
 \item[(1)] Extract communities with CPM for each time step.
 \item[(2)] Match the set of communities at succeeding time steps (far from trivial). 
 \end{enumerate}
 
-As (1) was already explained in section~\ref{cpm} we focus on (2) the matching of set of communities between consecutive time steps [is it really consecutive or only after one another?]
+As (1) was already explained in section~\ref{cpm} we focus on (2) the matching of set of communities between consecutive time steps [is it really consecutive or only after one another?]\\
+
+As overlapping communities are included, this step is not trivial. The relative node overlap $C(A,B)$ between two nodes $A$ and $B$ in a simple way can be defined as
+
+$$C(A,B) = \frac{ \left| A \cap B\right| }{\left| A \cup B\right|}$$
+
+[TODO this method is not working for overlapping communities, paper is desribing an over complicated matching algorithm :(]
 
 
 \subsection{Summary of variables an measured statistics}
@@ -207,10 +222,26 @@ the overall coverage of the community structure (ratio of nodes contained in at 
 distribution of community size is measured too\\
 
 \subsection{Main Findings of the paper}
-difference between big and small communities and development over time
+difference between big and small communities and development over time\\
+small communities live longer if members stay the same\\
+if members change, they die\\
+big communities live longer if members are changed permanently\\
+if members stay the same they die\\
 
-\section{Limitations and Implications regarding my dataset}
-what are problems with this method and what are implications regarding my dataset and network
+\section{Implications regarding my dataset}
+what are problems with this method and what are implications regarding my dataset and network\\
+I need a new function for calculating edge weights\\
+find out what time slices are possible in my data[TODO]\\
+try out CPM (there is an implementation in R) with static network\\
+calculate measurement to see if quality of communities is good, find out right $k$ and $w^*$, maybe use the one from paper but, evaluate if those are good\\
+create snapshots of the paper and try if provided function for calculating weight at timesteps can be used\\
+find an implementation of the community mapping for each time step\\
+
+\section{Future Work}
+find out what other methods are out there with implementations, I dont have the time to implement a cutting edge algorithm\\
+compare my network/community structure to null-model(or other) or to other social network to see if everything is nice\\
+maybe some time should be invested for finding a good representation for edge weights calculation, related to collaboration definition\\
+next time choose a less complicated topic\\
 
 {
 	\bibliographystyle{plain}
