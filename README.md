@@ -1,2 +1,2 @@
 # paper-temporal-dev-networks
-Summary of methods to analyse the temporal development of communities within co-authorship networks.
+Summary of one methods to analyse the temporal development of overlapping communities within collaboration (co-authorship) networks. (based on Pallas clique percolation method)
