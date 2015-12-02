@@ -1,0 +1,179 @@
+
+%%%%%%%%%%%%%%%%%%%%%%% file typeinst.tex %%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This is the LaTeX source for the instructions to authors using
+% the LaTeX document class 'llncs.cls' for contributions to
+% the Lecture Notes in Computer Sciences series.
+% http://www.springer.com/lncs       Springer Heidelberg 2006/05/04
+%
+% It may be used as a template for your own input - copy it
+% to a new file with a new name and use it as the basis
+% for your article.
+%
+% NB: the document class 'llncs' has its own and detailed documentation, see
+% ftp://ftp.springer.de/data/pubftp/pub/tex/latex/llncs/latex2e/llncsdoc.pdf
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[runningheads,a4paper]{llncs}
+
+\usepackage{amssymb}
+\setcounter{tocdepth}{3}
+\usepackage{graphicx}
+
+\usepackage{url}
+\urldef{\mailsa}\path|alexa.schlegel@gmail.com|
+\newcommand{\keywords}[1]{\par\addvspace\baselineskip
+\noindent\keywordname\enspace\ignorespaces#1}
+
+\renewcommand*\familydefault{\sfdefault}
+
+\begin{document}
+
+\mainmatter  % start of an individual contribution
+
+% first the title is needed
+\title{Temporal Development of Overlapping Communities in Co-Authorship Networks}
+
+% a short form should be given in case it is too long for the running head
+\titlerunning{Temporal Development of Overlapping Communities}
+
+% the name(s) of the author(s) follow(s) next
+%
+% NB: Chinese authors should write their first names(s) in front of
+% their surnames. This ensures that the names appear correctly in
+% the running heads and the author index.
+%
+\author{Alexa Schlegel%
+}
+%
+\authorrunning{Temporal Development of Overlapping Communities}
+% (feature abused for this document to repeat the title also on left hand pages)
+
+% the affiliations are given next; don't give your e-mail address
+% unless you accept that it will be published
+\institute{Freie Universit{\"a}t Berlin, Institute of Computer Science\\
+\mailsa\\
+}
+
+%
+% NB: a more complex sample for affiliations and the mapping to the
+% corresponding authors can be found in the file "llncs.dem"
+% (search for the string "\mainmatter" where a contribution starts).
+% "llncs.dem" accompanies the document class "llncs.cls".
+%
+
+\toctitle{Temporal Development of Overlapping Communities in Co-Authorship Networks}
+\tocauthor{Authors' Instructions}
+\maketitle
+
+
+\begin{abstract}
+The abstract should summarize the contents of the paper and should
+contain at least 70 and at most 150 words.
+\keywords{co-authorship networks, scientific collaboration, overlapping community detection, temporal analysis, clique percolation}
+\end{abstract}
+
+\section{Introduction}
+introduction to the topic\\
+why i am doing this\\
+motivation\\
+research question\\
+limitations with my dataset\\
+goal of the paper\\
+
+\section{Related Work}
+what areas belong to related work, what is covered here
+other papers doing the same as I want to do
+community detection and temporal aspects of network analysis
+
+\subsection{Sientific collaboration}
+TODO, why is this important
+
+\subsection{Co-Authorship Network}
+short summary networks, social networks, SNA, co-authorship networks, references to who studied those networks
+
+\subsection{Communities in Social Networks}
+Definition of communities\\
+\cite{girvan2002community}\\
+\url{http://www.ams.org/notices/200909/rtx090901082p.pdf}\\
+\cite{palla2005uncovering}\\
+\cite{fortunato2010community}\\
+\url{https://en.wikipedia.org/wiki/Community_structure}
+
+\subsubsection{Community Detection Algorithms in General}
+[TODO short summary with further readings]
+maybe short classification of algorithms from~\cite{fortunato2010community}\\
+divisive and agglomerative methos\\
+
+\subsubsection{Detecting Overlapping Communities}
+Need for detecting overlapping communities in co-authorship networks [TODO - find citation]
+
+[However, in real graphs vertices are often shared between communities (Section 2), and the issue of detecting overlapping communities has become quite popular in the last few years. We devote this section to the main techniques to detect overlapping communities.~\cite{fortunato2010community}]
+
+One poplular method for detecting overlapping communities is the \emph{clique percolation method} introduced by Palla et. al in 2005~\cite{palla2005uncovering}
+
+Other methods are summarized by Fortunato~\cite{fortunato2010community} starting page 131 [TODO summary with references]
+
+\section{Clique Percolation Method}
+Clique percolation method (CPM) is used to identify overlapping communities in networks. The following section summarizes the main findings regarding co-authorship networks and the algorithm used in the paper \emph{Uncovering the overlapping community structure of complex networks in nature and society} by Palla, Derenyi, Farkas and Vicsek.
+
+The commmunity definition used in the paper relies on the fact that a community consists of fully connected subgraphs (\emph{cliques}), that share many nodes. \emph{$k$-cliques} are fully connected subgraphs with $k$ nodes. A community in this context is called a \emph{$k$-clique-community}, which is defined as a union of all $k$-cliques, which can be reached from each other through a number of \emph{adjacent $k$-cliques}. Two $k$-cliques are called adjacent if they share $k-1$ nodes. An example can be seen in figure [TODO image $k$-clique and $k$-clique-community].
+
+\subsection{Algorithm}
+Based on the explained community definition the algorithm consists of the following steps, which will be explained in more detail. [TODO an example of a graph in each step of the algorithm can be seen in figure X].
+
+\begin{enumerate}
+\item Find all \emph{maximal cliques}, these are cliques that are not part of larger cliques.
+\item Prepare clique-clique overlap matrix.
+\item Treshold the matrix.
+\item All connected components represent a community.
+\end{enumerate}
+
+\subsubsection{Find all maximal cliques}
+Maximal cliques cannot be subsets of larger cliques, that is why they are detected in decreasing order of their size. The largest possible clique size $s_max$ is determinde by the maximal degree $d_max$ found in the network.
+
+\begin{enumerate}
+\item[(1)] Determine $s=s_{max}$.
+\item[(2)] Repeatedly choose a node $v$ from the graph and
+\item[(3)] extract all cliques of size $s$ containing $v$ then
+\item[(4)] delete the node and its edges.
+\item[(5)] When no nodes are left set $s=s-1$ and start with (2) on the original graph.
+\end{enumerate}
+
+The set of already found cliques do influence the found cliques in later steps, as the later found cliques are smaller. The detailed algorithm for step (3) finding cliques of size $s$ of $v$ can be looked up in supplemtary material to the paper on section 1.1.2, page 3. The result of this a set of all maximal cliques, this set contains $n_c$ cliques.
+
+\subsubsection{Prepare clique-clique overlap matrix}
+The dimension of the overlap matrix is $n_c \times n_c$. Each row and column represent a clique, the matrix element (not the diagonal entries) are the common nodes those cliques share. The diagonal entries represent the size of the cliques.
+
+\subsubsection{Treshold the matrix}
+All off-diagonal entry smaller than $k-1$ and diagonal entries smaller than $k$ are set to $0$, remaining elements are set to $1$, resulting in a binary matrix, representing a network of cliques.
+ 
+\subsubsection{All connected components represent a community}
+Looking at the binary matrix (or resulting graph) we just need to look for connected components, those represent the $k$-clique-communities.
+
+
+\subsection{Details on $k$ \& $w^*$ for co-authorship networks}
+calculation of link weights $1/(n-1)$, with $n$ number of authors per paper. Treshold $w^*$ for link weights. This is how collaboration is weighted or defined.
+
+\subsection{Summary of variables an measured statistics}
+Maybe important what should I measure in my network.
+
+[TODO what $k$ to choose]
+
+\subsection{Main Findings of the paper}
+Overlaps in networks are significant. The distributions introduced in the paper (community size, community degree, overlap size, membership number) reveal universal features of networks. The network of communities has non-trivial correlations and specific scaling properties. Providing a tool with which to enterprete the inner organisation of large networks.
+
+\section{Community Evolution based in CPM}
+TODO
+
+\section{Limitations and Implications regarding my dataset}
+what are problems with this method and what are implications regarding my dataset and network
+
+{
+	\bibliographystyle{plain}
+	\bibliography{../papers}
+}
+
+\end{document}
