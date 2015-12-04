@@ -1,26 +1,11 @@
-
-%%%%%%%%%%%%%%%%%%%%%%% file typeinst.tex %%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% This is the LaTeX source for the instructions to authors using
-% the LaTeX document class 'llncs.cls' for contributions to
-% the Lecture Notes in Computer Sciences series.
-% http://www.springer.com/lncs       Springer Heidelberg 2006/05/04
-%
-% It may be used as a template for your own input - copy it
-% to a new file with a new name and use it as the basis
-% for your article.
-%
-% NB: the document class 'llncs' has its own and detailed documentation, see
-% ftp://ftp.springer.de/data/pubftp/pub/tex/latex/llncs/latex2e/llncsdoc.pdf
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 \documentclass[runningheads,a4paper]{llncs}
 
 \usepackage{amssymb}
 \setcounter{tocdepth}{3}
+
 \usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{caption}
 
 \usepackage{url}
 \urldef{\mailsa}\path|alexa.schlegel@gmail.com|
@@ -82,6 +67,7 @@ research question: how do communities within co-authorship networks evolve over 
 goal of the paper of the paper is to find an appropriate method for analysing scientific collaboration networks over time\\
 
 \section{Related Work}
+\label{related}
 community detection in complex and large graphs\\
 different methods of community detection algorithms\\
 communities in collaboration networks (co-authorship)\\
@@ -92,15 +78,18 @@ focus not on different time slicing methods but more on community detection\\
 references to temporal stuff [TODO cite moody]
 
 \subsection{Sientific collaboration}
+\label{related-collabo}
 TODO definition [TODO cite]\\
 based on who borad or narrow the definition of collaboration is, a function/measurement for edgeweight can be chosen
 
 \subsection{Co-Authorship Network}
+\label{related-coauth}
 short summary networks, social networks, SNA, co-authorship networks\\
 references to who studied those networks [Newmann and Barabasi] just references\\
 nodes are authors, links are collaboration, wights for nodes and edges\\
 
 \subsection{Communities in Social Networks}
+\label{related-communities}
 Definition of communities, there is no proper definition yet\\
 \cite{girvan2002community}\\
 \url{http://www.ams.org/notices/200909/rtx090901082p.pdf}\\
@@ -110,12 +99,14 @@ Definition of communities, there is no proper definition yet\\
 most real world networks contain parts in which nodes are more highly conected to each other than to the rest of the network, those sets are usually called clusters, communities, cohesive groups or modeuls [TODO cite], they have no wiedely accepted unique definition. the detection algorithms mainly define what a community is.
 
 \subsubsection{Community Detection Algorithms in General}
+\label{related-communities-general}
 [TODO short summary with further readings]
 maybe short classification of algorithms from~\cite{fortunato2010community}\\
 maybe there are so many aproaches\\
 divisive and agglomerative methos\\
 
 \subsubsection{Detecting Overlapping Communities}
+\label{related-communities-overlapping}
 Need for detecting overlapping communities in co-authorship networks [TODO - find citation]
 
 [However, in real graphs vertices are often shared between communities (Section 2), and the issue of detecting overlapping communities has become quite popular in the last few years. We devote this section to the main techniques to detect overlapping communities.~\cite{fortunato2010community}]
@@ -126,15 +117,53 @@ Other methods are summarized by Fortunato~\cite{fortunato2010community} starting
 
 \section{Clique Percolation Method}
 \label{cpm}
-Clique percolation method (CPM) is used to identify overlapping communities in networks. The following section summarizes the main findings regarding co-authorship networks and the algorithm used in the paper \emph{Uncovering the overlapping community structure of complex networks in nature and society} by Palla, Derenyi, Farkas and Vicsek.
+The clique percolation method (CPM) developed by Palla et.~al~\cite{palla2007quantifying} is used to identify overlapping communities in networks.
+The authors tested and evaluated their method using a co-authorship network, protein-protein interaction network, word associations network and a network constructed from variables within the source code of an open source ftp programm.
+The following section explains the algorithm and summarizes the main findings of the paper regardin co-authorship networks.
 
-The commmunity definition used in the paper relies on the fact that a community consists of fully connected subgraphs (\emph{cliques}), that share many nodes. \emph{$k$-cliques} are fully connected subgraphs with $k$ nodes. A community in this context is called a \emph{$k$-clique-community}, which is defined as a union of all $k$-cliques, which can be reached from each other through a number of \emph{adjacent $k$-cliques}. Two $k$-cliques are called adjacent if they share $k-1$ nodes. An example can be seen in figure [TODO image $k$-clique and $k$-clique-community].
+The commmunity definition the algorithm implies, relies on the fact that a community consists of fully connected subgraphs, called \emph{cliques}, that share many nodes.
+\emph{$k$-cliques} are fully connected subgraphs with $k$ nodes.
+In figure~\ref{fig:cliques} example of ${3,4}$-cliques are given.
+A community, in this context, is called a \emph{$k$-clique-community}, which is defined as a union of all $k$-cliques, which can be reached from each other through a number of \emph{adjacent $k$-cliques}.
+Two $k$-cliques are called adjacent if they share $k-1$ nodes.
+In figure~X the so called $k$-clique template rolling is visualized for a $3$-clique.
+A $k$-clique community is best described by relocating one node in each step until all nodes of the community are discovered.
 
-\subsection{Construction of the co-authorship network}
-TODO, how are weights calculated in this network, what is a collaboration here. $n/(n-1)$ with $n$ auhors for one publication
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{3-clique}
+        \caption{3-cliquel}
+        \label{fig:3clique}
+    \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+      %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[b]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{4-clique}
+        \caption{4-clique}
+        \label{fig:4clique}
+    \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+    %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[b]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{cliqueinside}
+        \caption{4-clique inside a graph}
+        \label{fig:cliqueInside}
+    \end{subfigure}
+    \caption{Examle of cliques}\label{fig:cliques}
+\end{figure}
+
+\begin{figure}
+	\includegraphics[width=\textwidth]{rolling.png}
+	\caption{Template rolling for a $3$-clique}
+	\label{fig:rolling}
+\end{figure}
 
 \subsection{Algorithm}
-Based on the explained community definition the algorithm consists of the following steps, which will be explained in more detail. [TODO an example of a graph in each step of the algorithm can be seen in figure X]. The starting point for the algorithm is a undirected unweighted graph. In section \ref{cpm-construction} we talk about generating an unweighted collaboration, co-authorship graph using a treshhold.
+The starting point for the algorithm is a undirected and unweighted graph. In section \ref{cpm-construction} we talk about generating the  unweighted co-authorship.
+Based on the explained community definition the algorithm consists of the following steps:
+
+[TODO: weiter ueberarbeiten ab hier]\\
 
 \begin{enumerate}
 \item Find all \emph{maximal cliques}, these are cliques that are not part of larger cliques.
@@ -165,6 +194,8 @@ All off-diagonal entry smaller than $k-1$ and diagonal entries smaller than $k$ 
 \subsubsection{All connected components represent a community}
 Looking at the binary matrix (or resulting graph) we just need to look for connected components, those represent the $k$-clique-communities.
 
+\subsection{Construction of the co-authorship network}
+TODO, how are weights calculated in this network, what is a collaboration here. $n/(n-1)$ with $n$ auhors for one publication
 
 \subsection{Construction of the network and Details on $k$ \& $w^*$ for co-authorship networks}
 \label{cpm-construction}
@@ -266,15 +297,18 @@ calculate measurement to see if quality of communities is good, find out right $
 create snapshots of the paper and try if provided function for calculating weight at timesteps can be used\\
 find an implementation of the community mapping for each time step\\
 
+say how big is my data\\
+what about time complexity\\
+
 \section{Future Work}
 find out what other methods are out there with implementations, I dont have the time to implement a cutting edge algorithm\\
 compare my network/community structure to null-model(or other) or to other social network to see if everything is nice\\
 maybe some time should be invested for finding a good representation for edge weights calculation, related to collaboration definition\\
 next time choose a less complicated topic\\
+how to visualize the development?
 
-{
-	\bibliographystyle{plain}
-	\bibliography{../papers}
-}
+
+\bibliographystyle{plain}
+\bibliography{../papers}
 
 \end{document}
