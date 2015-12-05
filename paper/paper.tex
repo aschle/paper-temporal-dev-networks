@@ -67,7 +67,7 @@ A co-authorship networks is a (scientific) collaboration network, where actors a
 Networks are in mathematical terms graphs, so they consist of nodes (vertex) and links (edges).
 In a co-authorship graph nodes are individual authors who are considered connected if the have co-aothored a paper.~\cite{newman2001structure}
 
-Usually those networks are used to study patterns of scientific collaboration in different fields, their development over time, identify key people regarding different measurement, detection and evolution of communities and many more.~\cite{barabasi2002evolution, newman2001structure, newman2004coauthorship} 
+Usually those networks are used to study patterns of scientific collaboration in different fields, their development over time, identify key people regarding different measurement, detection and evolution of communities and many more.~\cite{barabasi2002evolution}, \cite{newman2001structure} and \cite{newman2004coauthorship}.
 
 This seminar paper is motivated by a dataset consisting of 2277 publications related to geochemistry about stable metal isotopes (calcium, magnesium, lithium, siliium, etc.). This data was used to build an cummulated co-authorship network with an very simple approach to model collaboration: 
 The dataset was collected using the bibliographic database scopus.
@@ -98,7 +98,8 @@ Fortunato~\cite{fortunato2010community} gives also an overview about algorithms 
 The best known and widely cited is \emph{clique percolation method} by Palla et. al~\cite{palla2005uncovering}.
 There is an implementation provided by the authors called CFinder\footnote{CFinder is a tool which implements the clique percolation method by Palla and finding and visualizes overlapping dense groups of nodes in networks. \url{http://www.cfinder.org/}, 05.12.2015, 22:43}, and also an implementation in the R igraph library\footnote{\url{http://igraph.wikidot.com/community-detection-in-r#toc0}, 05.12.2015, 22:45}.
 
-Not only overlapping communities exists in networks, but also communities are structured in an hirarchical way. Recent work on algorithms detecting hirachical and overlapping sturctures  include~\cite{1367-2630-11-3-033015, Cui201485, Shen20091706}.
+Not only overlapping communities exists in networks, but also communities are structured in an hirarchical way.
+Recent work on algorithms detecting hirachical and overlapping sturctures  include~\cite{1367-2630-11-3-033015}, \cite{Cui201485}, \cite{Shen20091706}.
 
 ``The main phenomena occurring in the lifetime of a community are: birth, growth, contraction, merger with other communities, split, death.''~\cite{fortunato2010community} (see figure~\ref{fig:evolution})
 The detection of dynamic communities has been studied by Palla et.~al~\cite{palla2007quantifying} using CPM for each snapshot of the graph. Further information on dynamic communities can be found in section 13 of~\cite{fortunato2010community}.
@@ -350,6 +351,7 @@ The paper summarized differences between large and small communities and their d
 This part describe the steps I would need to undertake to carry out a temporal analysis of communities within the geochemistry dataset or with any other dataset, which forms a collaboration network.
 
 \begin{enumerate}
+\small
 	\item[(1)] Genrate slices of the network for each year.
 	\item[(2)] Find function for calculating edge weights.
 	\item[(3)] Apply edge weights to each snapshot.
@@ -371,5 +373,7 @@ As this paper dicusses only one method an extensive literature research should f
 	\bibliographystyle{plain}
 	\bibliography{papers}
 }
+
+
 
 \end{document}
