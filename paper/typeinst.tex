@@ -55,9 +55,8 @@
 
 
 \begin{abstract}
-The abstract should summarize the contents of the paper and should
-contain at least 70 and at most 150 words.
-\keywords{co-authorship networks, scientific collaboration, overlapping community detection, temporal analysis, clique percolation}
+TODO TODO TODO
+\keywords{co-authorship networks, scientific collaboration networks, overlapping community detection, temporal analysis, clique percolation, dynamic communities}
 \end{abstract}
 
 \section{Introduction and Motivation}
@@ -348,26 +347,25 @@ For evaluating the quality the overall coverage of the community structure (rati
 The paper summarized differences between large and small communities and their development over time. Small communities live longer if the members stay the same over time. If members in small communities change frequently, they only live for a short time. Large communities live longer if members are changed permanently, if members stay the same they die quickly.
 
 \section{Implications regarding the geochemistry dataset}
-slice the network per year, 18 snapshots\\
-basic statistics about timeslices (how many publications, nodes)\\
-function for calculating edge weights\\
-apply edge weight to snapshots\\
-try out CPM (there is an implementation in R or cfinder) with static network\\
-do cpm per snapshot\\
-find out $k$\\
-adjust $w^*$\\
-calculate measurement to see if quality of communities is good (connectins inside community VS outside community), also coverage of community structure and distribution if community size (see~\ref{evolution-vars}).\\
-find an implementation or implemet community mapping\\
-time complexity whould be no problem because my dataset is not very big.\\
+This part describe the steps I would need to undertake to carry out a temporal analysis of communities within the geochemistry dataset or with any other dataset, which forms a collaboration network.
+
+\begin{enumerate}
+	\item[(1)] Genrate slices of the network for each year.
+	\item[(2)] Find function for calculating edge weights.
+	\item[(3)] Apply edge weights to each snapshot.
+	\item[(4)] Find out $k$.
+	\item[(5)] Adjust treshold $w^*$ according to $k$.	
+	\item[(6)] Do CPM for each snapshot.
+	\item[(7)] Conduct community mapping.
+\end{enumerate}
+
+It is also important to look at basic statistics after (1) timeslicing. For example to look at how many publications per timeslice, degree distributions, nodes on average per timeslice to check of timeslincing was done right or needs to be adjusted.
+The function for calculating edge weights (2) could be used from the paper (see section~\ref{evolution-constr}), but it would need to be checked if the resulting networks (3) are still valid.
+For findng the right $k$ (4) and $w^*$ (5) and extended analysis of network caracteristics like coverage of community structure and distribution if community size (see~\ref{evolution-vars}) would need to be carried out. Also the quality of the detected communities would need evaluation, comparing density within the community to outside the community. Using CFinder or R for CMP (6) detection. It is open to me if there is an implementation for the community mapping (7), if not I would neet to implement it.
+Time complexity will be no problem because my dataset is not very big. About 2.000 paper resulting in about 500 nodes.
 
 \section{Future Work}
-find out what other methods are out there in more detail\\
-only had time for one method\\
-look at more recent work\\
-compare results to results in paper, similar?\\
-maybe some time should be invested for finding a good representation for edge weights calculation, related to collaboration definition\\
-how to visualize the development\\
-
+As this paper dicusses only one method an extensive literature research should follow, finding out more methods for that problem. Also a closer look on recent work would be good. The results from this dataset should be compared to the results of Palla. Maybe some time should be invested for finding a good representation for edge weights calculation, related to collaboration definition. The visuaization of the community evolution remains open and would be a broad topic, but exciting to investigate further.
 
 {
 	\bibliographystyle{plain}
