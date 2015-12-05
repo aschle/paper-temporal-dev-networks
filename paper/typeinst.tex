@@ -82,52 +82,26 @@ The goal of this seminar paper therefeore is to find and explain an already esta
 
 \section{Related Work}
 \label{related}
-community detection in complex and large graphs\\
-different methods of community detection algorithms\\
-communities in collaboration networks (co-authorship)\\
-temporal aspects of communities\\
-time slicing and dividing the network into snapshots\\
-algorithms and implementations\\
-focus not on different time slicing methods but more on community detection\\
-references to temporal stuff [TODO cite moody]
+I am foucsing on community detection algorithms in general and especially for co-aothorship networks. A second topic is how to track communities over time and how to model scientific collaboration in relation to edge weights.
 
-\subsection{Sientific collaboration}
-\label{related-collabo}
-TODO definition [TODO cite]\\
-based on who borad or narrow the definition of collaboration is, a function/measurement for edgeweight can be chosen
+``Most real world networks contain parts in which nodes are more highly conected to each other than to the rest of the network, those sets are usually called clusters, communities, cohesive groups or modules, they have no wiedely accepted, unique definition.''~\cite{palla2005uncovering}
 
-\subsection{Co-Authorship Network}
-\label{related-coauth}
-short summary networks, social networks, SNA, co-authorship networks\\
-references to who studied those networks [Newmann and Barabasi] just references\\
-nodes are authors, links are collaboration, wights for nodes and edges\\
+The way ``more highly connected'' is preciesely defined makes the difference between community detection algorithms. It depends on the heuristic which is employed to identify communiteis.~\cite{porter2009communities}
 
-\subsection{Communities in Social Networks}
-\label{related-communities}
-Definition of communities, there is no proper definition yet\\
-\cite{girvan2002community}\\
-\url{http://www.ams.org/notices/200909/rtx090901082p.pdf}\\
-\cite{palla2005uncovering}\\
-\cite{fortunato2010community}\\
-\url{https://en.wikipedia.org/wiki/Community_structure}
-most real world networks contain parts in which nodes are more highly conected to each other than to the rest of the network, those sets are usually called clusters, communities, cohesive groups or modeuls [TODO cite], they have no wiedely accepted unique definition. the detection algorithms mainly define what a community is.
+Fortunato~\cite{fortunato2010community} gives an extended overview about different algorithms regarding community detection, to explain any would exceed the scope of this work. For example traditional methods include algorithms based on graph partitioning, hicharchical clustering and spectral clustering. there are also divisive and agglomeative algorithms, the best known one from this category is Girvan and Newman~\cite{girvan2002community}.
 
-\subsubsection{Community Detection Algorithms in General}
-\label{related-communities-general}
-[TODO short summary with further readings]
-maybe short classification of algorithms from~\cite{fortunato2010community}\\
-maybe there are so many aproaches\\
-divisive and agglomerative methos\\
+Most algorihtms determine distinctive sets of communities, but most real world networks  consists of overlapping and nested communities (e.g freidnship network of a person)~\cite{palla2005uncovering}.
 
-\subsubsection{Detecting Overlapping Communities}
-\label{related-communities-overlapping}
-Need for detecting overlapping communities in co-authorship networks [TODO - find citation]
+Fortunato~\cite{fortunato2010community} gives also an overview about algorithms how detect overlapping communities, the best known and wideliy cited is clique percolation method by Palla et. al~\cite{palla2005uncovering}. There is an implementation called cfinder\footnote{cFinder webseite todo}, and also an implementation in R igraph library\footnote{R igraph library todo link}.
 
-[However, in real graphs vertices are often shared between communities (Section 2), and the issue of detecting overlapping communities has become quite popular in the last few years. We devote this section to the main techniques to detect overlapping communities.~\cite{fortunato2010community}]
 
-One poplular method for detecting overlapping communities is the \emph{clique percolation method} introduced by Palla et. al in 2005~\cite{palla2005uncovering}
+community detection algorithms in co-aothorship networks\\
 
-Other methods are summarized by Fortunato~\cite{fortunato2010community} starting page 131 [TODO summary with references]
+development of communities over time\\
+
+temporal graphs\\
+
+how to calucalte edge weight temporal function\\
 
 \section{Clique Percolation Method}
 \label{cpm}
@@ -364,7 +338,7 @@ For evaluating the quality the overall coverage of the community structure (rati
 \label{evolution-findings}
 The paper summarized differences between large and small communities and their development over time. Small communities live longer if the members stay the same over time. If members in small communities change frequently, they only live for a short time. Large communities live longer if members are changed permanently, if members stay the same they die quickly.
 
-\section{Implications regarding my dataset}
+\section{Implications regarding the geochenstry dataset}
 what are problems with this method and what are implications regarding my dataset and network\\
 I need a new function for calculating edge weights\\
 find out what time slices are possible in my data[TODO]\\
