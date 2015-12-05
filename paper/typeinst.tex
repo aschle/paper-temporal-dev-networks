@@ -85,23 +85,32 @@ The goal of this seminar paper therefeore is to find and explain an already esta
 I am foucsing on community detection algorithms in general and especially for co-aothorship networks. A second topic is how to track communities over time and how to model scientific collaboration in relation to edge weights.
 
 ``Most real world networks contain parts in which nodes are more highly conected to each other than to the rest of the network, those sets are usually called clusters, communities, cohesive groups or modules, they have no wiedely accepted, unique definition.''~\cite{palla2005uncovering}
+The way ``more highly connected'' is preciesely defined makes the difference between community detection algorithms.
+It depends on the heuristic which is employed to identify communiteis.~\cite{porter2009communities}
 
-The way ``more highly connected'' is preciesely defined makes the difference between community detection algorithms. It depends on the heuristic which is employed to identify communiteis.~\cite{porter2009communities}
+Fortunato~\cite{fortunato2010community} gives an extended overview about different algorithms regarding community detection.
+To explain any would exceed the scope of this work.
+For example traditional methods include algorithms based on graph partitioning, hicharchical clustering and spectral clustering.
+There are also divisive and agglomerative algorithms.
+The best known one from this category is Girvan and Newman~\cite{girvan2002community}.
 
-Fortunato~\cite{fortunato2010community} gives an extended overview about different algorithms regarding community detection, to explain any would exceed the scope of this work. For example traditional methods include algorithms based on graph partitioning, hicharchical clustering and spectral clustering. there are also divisive and agglomeative algorithms, the best known one from this category is Girvan and Newman~\cite{girvan2002community}.
+Most algorihtms determine distinctive sets of communities (a node can only belong to a single community), but most real world networks  consists of overlapping and nested communities (e.g friendship network of a person)~\cite{palla2005uncovering}.
+Fortunato~\cite{fortunato2010community} gives also an overview about algorithms detecting overlapping communities.
+The best known and widely cited is \emph{clique percolation method} by Palla et. al~\cite{palla2005uncovering}.
+There is an implementation provided by the authors called CFinder\footnote{CFinder is a tool which implements the clique percolation method by Palla and finding and visualizes overlapping dense groups of nodes in networks. \url{http://www.cfinder.org/}, 05.12.2015, 22:43}, and also an implementation in the R igraph library\footnote{\url{http://igraph.wikidot.com/community-detection-in-r#toc0}, 05.12.2015, 22:45}.
 
-Most algorihtms determine distinctive sets of communities, but most real world networks  consists of overlapping and nested communities (e.g freidnship network of a person)~\cite{palla2005uncovering}.
+Not only overlapping communities exists in networks, but also communities are structured in an hirarchical way. Recent work on algorithms detecting hirachical and overlapping sturctures  include~\cite{1367-2630-11-3-033015, Cui201485, Shen20091706}.
 
-Fortunato~\cite{fortunato2010community} gives also an overview about algorithms how detect overlapping communities, the best known and wideliy cited is clique percolation method by Palla et. al~\cite{palla2005uncovering}. There is an implementation called cfinder\footnote{cFinder webseite todo}, and also an implementation in R igraph library\footnote{R igraph library todo link}.
+``The main phenomena occurring in the lifetime of a community are: birth, growth, contraction, merger with other communities, split, death.''~\cite{fortunato2010community} (see figure~\ref{fig:evolution})
+The detection of dynamic communities has been studied by Palla et.~al~\cite{palla2007quantifying} using CPM for each snapshot of the graph. Further information on dynamic communities can be found in section 13 of~\cite{fortunato2010community}.
 
+\begin{figure}
+	\includegraphics[width=\textwidth]{villsize.jpg}
+	\caption{lifetime of a community}
+	\label{fig:evolution}
+\end{figure}
 
-community detection algorithms in co-aothorship networks\\
-
-development of communities over time\\
-
-temporal graphs\\
-
-how to calucalte edge weight temporal function\\
+As CPM is widely used method for detecting overlapping communities I will go with this method. The following describes the CPM and also the temporal algorithm mainly based on those tow papers~\cite{palla2005uncovering} and \cite{palla2007quantifying}.
 
 \section{Clique Percolation Method}
 \label{cpm}
@@ -338,24 +347,27 @@ For evaluating the quality the overall coverage of the community structure (rati
 \label{evolution-findings}
 The paper summarized differences between large and small communities and their development over time. Small communities live longer if the members stay the same over time. If members in small communities change frequently, they only live for a short time. Large communities live longer if members are changed permanently, if members stay the same they die quickly.
 
-\section{Implications regarding the geochenstry dataset}
-what are problems with this method and what are implications regarding my dataset and network\\
-I need a new function for calculating edge weights\\
-find out what time slices are possible in my data[TODO]\\
-try out CPM (there is an implementation in R) with static network\\
-calculate measurement to see if quality of communities is good, find out right $k$ and $w^*$, maybe use the one from paper but, evaluate if those are good\\
-create snapshots of the paper and try if provided function for calculating weight at timesteps can be used\\
-find an implementation of the community mapping for each time step\\
-
-say how big is my data\\
-what about time complexity\\
+\section{Implications regarding the geochemistry dataset}
+slice the network per year, 18 snapshots\\
+basic statistics about timeslices (how many publications, nodes)\\
+function for calculating edge weights\\
+apply edge weight to snapshots\\
+try out CPM (there is an implementation in R or cfinder) with static network\\
+do cpm per snapshot\\
+find out $k$\\
+adjust $w^*$\\
+calculate measurement to see if quality of communities is good (connectins inside community VS outside community), also coverage of community structure and distribution if community size (see~\ref{evolution-vars}).\\
+find an implementation or implemet community mapping\\
+time complexity whould be no problem because my dataset is not very big.\\
 
 \section{Future Work}
-find out what other methods are out there with implementations, I dont have the time to implement a cutting edge algorithm\\
-compare my network/community structure to null-model(or other) or to other social network to see if everything is nice\\
+find out what other methods are out there in more detail\\
+only had time for one method\\
+look at more recent work\\
+compare results to results in paper, similar?\\
 maybe some time should be invested for finding a good representation for edge weights calculation, related to collaboration definition\\
-next time choose a less complicated topic\\
-how to visualize the development?
+how to visualize the development\\
+
 
 {
 	\bibliographystyle{plain}
