@@ -6,8 +6,8 @@
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{caption}
-
 \usepackage{url}
+
 \urldef{\mailsa}\path|alexa.schlegel@gmail.com|
 \newcommand{\keywords}[1]{\par\addvspace\baselineskip
 \noindent\keywordname\enspace\ignorespaces#1}
@@ -60,11 +60,25 @@ contain at least 70 and at most 150 words.
 \keywords{co-authorship networks, scientific collaboration, overlapping community detection, temporal analysis, clique percolation}
 \end{abstract}
 
-\section{Introduction}
-introduction to the topic, scientific collaboration, co-authorship networks, social networks\\
-motivation: dataset, already constructed co-authorship network, based on very simple modeling of collaboration, self constructed trashhold\\
-research question: how do communities within co-authorship networks evolve over time? in geochemistry people often focus on one isotope system, and stick to this topic. do researchers in geochemistry really focus on one topic or do they change the field over time? why do they change field and were do they change to? by analysing the network over time this question could be answered maybe\\
-goal of the paper of the paper is to find an appropriate method for analysing scientific collaboration networks over time\\
+\section{Introduction and Motivation}
+A social network is a representation of a social structure consisting of actors (e.g. individuals, affiliations) and their social interactions.
+The network model conceptualizes (e.g. social, economic, political) structure as lasting pattern of interactions between actors.~\cite{wasserman1994social}
+
+A co-authorship networks is a (scientific) collaboration network, where actors are scientists and the social interaction is the collaboration work resulting in publishing a paper together.
+Networks are in mathematical terms graphs, so they consist of nodes (vertex) and links (edges).
+In a co-authorship graph nodes are individual authors who are considered connected if the have co-aothored a paper.~\cite{newman2001structure}
+
+Usually those networks are used to study patterns of scientific collaboration in different fields, their development over time, identify key people regarding different measurement, detection and evolution of communities and many more.~\cite{barabasi2002evolution, newman2001structure, newman2004coauthorship} 
+
+This seminar paper is motivated by a dataset consisting of 2277 publications related to geochemistry about stable metal isotopes (calcium, magnesium, lithium, siliium, etc.). This data was used to build an cummulated co-authorship network with an very simple approach to model collaboration: 
+The dataset was collected using the bibliographic database scopus.
+It is an almost complete dataset starting from 1997/98 until 2014.
+The dataset consists of authors and co-athors, title, year, abstract and affiliations.
+Basic netowrk analysis had already been conducted for example centrality measurement, community detection, degree distribution and average degree.
+
+As the dataset includes temporal information, the question arises how do communities within this type of co-authorship network evlolve over time. In geochemistry people often tend to focus on one isotope system, and stick to this topic for a long time. Do researchers in geochemistry really focus on one topic or do they change the field over time?
+
+The goal of this seminar paper therefeore is to find and explain an already established and well understood/studied method for analysing the temporal development of communities within co-authorship networks. The main point is to understand the undelying algorithm in detail and to find out implications and challenges when applying this method to the geochemistry dataset.
 
 \section{Related Work}
 \label{related}
@@ -221,18 +235,18 @@ In figure~\ref{fig:matrix} the clique-clique overlap matrix of graph in figure~\
 
 \subsubsection{(3) Treshold the matrix}
 All off-diagonal entries smaller than $k-1$ and diagonal entries smaller than $k$ are set to $0$.
-The remaining elements are set to $1$, resulting in a binary matrix, representing a network of cliques. The tresholding can be done repeatedly without calculating a new matrix.
+The remaining elements are set to $1$, resulting in a binary matrix, representing a network of cliques. The tresholding can be done repeatedly without calculating a new matrix. See figure~\ref{fig:matrixtrashed}.
 
 \begin{figure}
 \begin{center}
 	\includegraphics[width=0.8\textwidth]{matrixtrashed}
 		\caption{This is the resulting clique graph after the treshholding with $k=4$. All connected components do represent a $k$-clique-community. There are only two communities.}
-		\label{fig:matrix}
+		\label{fig:matrixtrashed}
 \end{center}
 \end{figure}
  
 \subsubsection{(4) All connected components represent a community}
-In the resulting graph we just need to look for connected components, those represent the $k$-clique-communities.
+In the resulting graph we just need to look for connected components, those represent the $k$-clique-communities. See figure~\ref{fig:result}.
 
 \begin{figure}
 \begin{center}
@@ -369,8 +383,9 @@ maybe some time should be invested for finding a good representation for edge we
 next time choose a less complicated topic\\
 how to visualize the development?
 
-
-\bibliographystyle{plain}
-\bibliography{../papers}
+{
+	\bibliographystyle{plain}
+	\bibliography{papers}
+}
 
 \end{document}
