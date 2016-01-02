@@ -82,28 +82,27 @@ The goal of this seminar paper therefeore is to find and explain an already esta
 
 \section{Related Work}
 \label{related}
-I am foucsing on community detection algorithms in general and especially for co-aothorship networks. A second topic is how to track communities over time and how to model scientific collaboration in relation to edge weights.
-
+The related work focuses on algorithms for community detection especially for co-aothorship networks and how to track those detected communities over time.
 ``Most real world networks contain parts in which nodes are more highly connected to each other than to the rest of the network, those sets are usually called clusters, communities, cohesive groups or modules, they have no widely accepted, unique definition.''~\cite{palla2005uncovering}
 The way ``more highly connected'' is preciesely defined makes the difference between community detection algorithms.
 It depends on the heuristic which is employed to identify communiteis.~\cite{porter2009communities}
 
-Fortunato~\cite{fortunato2010community} gives an extended overview about different algorithms regarding community detection.
+Fortunato~\cite{fortunato2010community} gives an extended overview about various types of community detection algorithms.
 To explain any would exceed the scope of this work.
 For example traditional methods include algorithms based on graph partitioning, hicharchical clustering and spectral clustering.
 There are also divisive and agglomerative algorithms.
 The best known one from this category is Girvan and Newman~\cite{girvan2002community}.
 
-Most algorihtms determine distinctive sets of communities (a node can only belong to a single community), but most real world networks  consists of overlapping and nested communities (e.g friendship network of a person)~\cite{palla2005uncovering}.
+Most algorihtms determine distinctive sets of communities, so a node can only belong to a single community. Most real world networks  consists of overlapping and nested communitiesm e.g.~friendship network of a person~\cite{palla2005uncovering}.
 Fortunato~\cite{fortunato2010community} gives also an overview about algorithms detecting overlapping communities.
-The best known and widely cited is \emph{clique percolation method} by Palla et. al~\cite{palla2005uncovering}.
-There is an implementation provided by the authors called CFinder\footnote{CFinder is a tool which implements the clique percolation method by Palla and finding and visualizes overlapping dense groups of nodes in networks. \url{http://www.cfinder.org/}, 05.12.2015, 22:43}, and also an implementation in the R igraph library\footnote{\url{http://igraph.wikidot.com/community-detection-in-r#toc0}, 05.12.2015, 22:45}.
+The best known and widely cited is the \emph{clique percolation method (CPM)} by Palla et~al.~\cite{palla2005uncovering}.
+There is an implementation provided by the authors, called \emph{CFinder}\footnote{CFinder is a tool which implements the clique percolation method by Palla and finding and visualizing overlapping dense groups of nodes in networks. \url{http://www.cfinder.org/}, 05.12.2015, 22:43}, and an implementation in the R igraph library\footnote{\url{http://igraph.wikidot.com/community-detection-in-r#toc0}, 05.12.2015, 22:45}.
 
 Not only overlapping communities exists in networks, but also communities are structured in an hirarchical way.
 Recent work on algorithms detecting hirachical and overlapping sturctures  include~\cite{1367-2630-11-3-033015}, \cite{Cui201485}, \cite{Shen20091706}.
 
-``The main phenomena occurring in the lifetime of a community are: birth, growth, contraction, merger with other communities, split, death.''~\cite{fortunato2010community} (see figure~\ref{fig:evolution})
-The detection of dynamic communities has been studied by Palla et.~al~\cite{palla2007quantifying} using CPM for each snapshot of the graph. Further information on dynamic communities can be found in section 13 of~\cite{fortunato2010community}.
+Looking at the temporal development of communities ``the main phenomena occurring in the lifetime of a community are: birth, growth, contraction, merger with other communities, split, death''~\cite{fortunato2010community} (see figure~\ref{fig:evolution}).
+The detection of dynamic communities has been studied by Palla et~al.~\cite{palla2007quantifying} using CPM for each snapshot of the graph. Further information on dynamic communities can be found in section 13 of~\cite{fortunato2010community}.
 
 \begin{figure}
 	\includegraphics[width=\textwidth]{villsize.jpg}
@@ -111,7 +110,7 @@ The detection of dynamic communities has been studied by Palla et.~al~\cite{pall
 	\label{fig:evolution}
 \end{figure}
 
-As CPM is widely used method for detecting overlapping communities I will go with this method. The following describes the CPM and also the temporal algorithm mainly based on those tow papers~\cite{palla2005uncovering} and \cite{palla2007quantifying}.
+As CPM is a widely used method for detecting overlapping communities I will explain this method in more detail. The following sections describe the CPM and also the temporal algorithm mainly based on the two papers of Palla et~al.~\cite{palla2005uncovering} and~\cite{palla2007quantifying}.
 
 \section{Clique Percolation Method}
 \label{cpm}
