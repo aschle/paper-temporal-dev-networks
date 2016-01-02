@@ -55,29 +55,30 @@
 
 
 \begin{abstract}
-TODO TODO TODO
+Detection of overlapping communities plays an important role when it comes to analysing scientific collaboration using social networks. This paper focuses on describing a method to analyze the temporal development of overlapping communities within co-authorship networks. The paper mainly relies on the work of Palla~et~al. using the clique percolation method for community extraction. The main goal was to find and understand an appropriate algorithm, which can be applied to an existing dataset of scientific publications. Implications regarding further actions and time complexity are discussed.
+
 \keywords{co-authorship networks, scientific collaboration networks, overlapping community detection, temporal analysis, clique percolation, dynamic communities}
 \end{abstract}
 
 \section{Introduction and Motivation}
-A social network is a representation of a social structure consisting of actors (e.g. individuals, affiliations) and their social interactions.
-The network model conceptualizes (e.g. social, economic, political) structure as lasting pattern of interactions between actors.~\cite{wasserman1994social}
+A \emph{social network} is a representation of a social structure consisting of actors, e.g.~individuals, affiliations, and their social interactions.
+The network model conceptualizes e.g.~social, economic or political structures as lasting pattern of interactions between actors.~\cite{wasserman1994social}
 
-A co-authorship networks is a (scientific) collaboration network, where actors are scientists and the social interaction is the collaboration work resulting in publishing a paper together.
-Networks are in mathematical terms graphs, so they consist of nodes (vertex) and links (edges).
-In a co-authorship graph nodes are individual authors who are considered connected if the have co-aothored a paper.~\cite{newman2001structure}
+A \emph{co-authorship networks} is a scientific collaboration network, where actors are scientists and the social interaction is collaboration work resulting in publishing papers together.
+In mathematical terms networks are graphs, therefore they consist of nodes (vertex) and links (edges).
+In a co-authorship network nodes are individual authors who are considered connected if they co-aothored a paper.~\cite{newman2001structure}
 
-Usually those networks are used to study patterns of scientific collaboration in different fields, their development over time, identify key people regarding different measurement, detection and evolution of communities and many more.~\cite{barabasi2002evolution}, \cite{newman2001structure} and \cite{newman2004coauthorship}.
+Usually those networks are used to study patterns of scientific collaboration in different fields, their development over time, identify key people regarding different network measurements, detection and evolution of communities and many more. See~\cite{barabasi2002evolution}, \cite{newman2001structure} and \cite{newman2004coauthorship} for more details.
 
-This seminar paper is motivated by a dataset consisting of 2277 publications related to geochemistry about stable metal isotopes (calcium, magnesium, lithium, siliium, etc.). This data was used to build an cummulated co-authorship network with an very simple approach to model collaboration: 
-The dataset was collected using the bibliographic database scopus.
-It is an almost complete dataset starting from 1997/98 until 2014.
-The dataset consists of authors and co-athors, title, year, abstract and affiliations.
-Basic netowrk analysis had already been conducted for example centrality measurement, community detection, degree distribution and average degree.
+This seminar paper is motivated by a dataset consisting of $2.277$ publications related to geochemistry focusing on papers talking about stable metal isotopes (e.g.~potassium, magnesium, lithium, silicon). This data was used to build an cummulated co-authorship network using an very simple approach to model collaboration.
 
-As the dataset includes temporal information, the question arises how do communities within this type of co-authorship network evlolve over time. In geochemistry people often tend to focus on one isotope system, and stick to this topic for a long time. Do researchers in geochemistry really focus on one topic or do they change the field over time?
+The dataset was collected using the bibliographic database scopus\footnote{\url{http://www.scopus.com/}} and includes publications starting from 1997/98 until 2014.
+The dataset consists of authors, co-athors, title, year, abstract and affiliations.
+A basic network analysis had already been conducted for example centrality measurement, community detection, degree distribution and average degree.
 
-The goal of this seminar paper therefeore is to find and explain an already established and well understood/studied method for analysing the temporal development of communities within co-authorship networks. The main point is to understand the undelying algorithm in detail and to find out implications and challenges when applying this method to the geochemistry dataset.
+As the data set includes temporal information~(publishing year), the following question arises: How do communities within this type of co-authorship network evlolve over time? In geochemistry people often tend to focus on one isotope system, and stick to this topic for a long time. Do researchers in geochemistry really focus on one specific topic or do they change the field over time?
+
+The goal of this seminar paper therefeore is to find and explain an already established and well understood method for analysing the temporal development of communities within co-authorship networks. The main point is to understand the undelying algorithm in detail and to find out implications and challenges when applying this method to the geochemistry dataset.
 
 \section{Related Work}
 \label{related}
