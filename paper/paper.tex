@@ -166,6 +166,7 @@ Based on the explained community definition the algorithm consists of the follow
 \item[(2)] Prepare clique-clique overlap matrix, or clique graph.
 \item[(3)] Threshold the matrix with a certain $k$.
 \item[(4)] Each connected component in the clique graph form a $k$-clique-community.
+\item[(5)] Post-processing.
 \end{enumerate}
 
 \subsubsection{(1) Find all maximal cliques}
@@ -228,6 +229,9 @@ The remaining elements are set to $1$, resulting in a binary matrix, representin
 \subsubsection{(4) Each connected component in the clique graph form a $k$-clique-community.}
 In the resulting graph we need to look for connected components, those represent the $k$-clique-communities, see figure~\ref{fig:result}.
 
+\subsubsection{(5) Post-processing.}
+The last setp of the algorithm assigns left over nodes, if possible, to communities. A node which is only connected to one certain community and is not part of a commnity already is assiciated with this community. The number of nodes belonging to a community can be increased.
+
 \begin{figure}
 \begin{center}
 	\includegraphics[width=0.8\textwidth]{result}
@@ -237,7 +241,7 @@ In the resulting graph we need to look for connected components, those represent
 \end{figure}
 
 
-\subsection{Construction of the co-authorship network, choosing $k$ and threshold $w^*$.}
+\subsection{Construction of the co-authorship network}
 \label{cpm-construction}
 The edge weights are calculated with $$\frac{n}{n-1}$$ with $n$ beeing the number of authers per publication.
 This results in modeling the collaboration between fewer authors as more intensive than the collaboration between a higher number of authors.  
@@ -253,15 +257,15 @@ So for each $k$ the treshold $w^*$ is lowered until the larges component becomes
 \subsection{Main Findings of the paper}
 Overlaps in networks are significant. The distributions introduced in the paper (community size, community degree, overlap size, membership number) reveal universal features of networks. The network of communities has non-trivial correlations and specific scaling properties.~\cite{palla2005uncovering}
 
-\section{Community Evolution based on CPM}
+\section{Community Evolution}
 \label{evolution}
-Palla et.~al~\cite{palla2007quantifying} developed an algorithm based on clique percolation (see section~\ref{cpm}) that allows the investigation of overlapping communities over time. They uncovered basic relationships characterizing community evolution within a co-authorship network and a phone-call network. The following section describes the main steps of the algorithm. A short summary of their main findings can be found in section~\ref{evolution-findings}.
+Palla et~al.~\cite{palla2007quantifying} developed an algorithm based on clique percolation (see section~\ref{cpm}) that allows the investigation of overlapping communities over time. They uncovered basic relationships characterizing community evolution within a co-authorship network and a phone-call network. The following section describes the main steps of the algorithm. A short summary of their main findings can be found in section~\ref{evolution-findings}.
 
 \subsection{Algorithm}
 \label{evolution-algo}
-The starting point of the algorithm is a set of undirected and unweighted  graphs for each timestep.
-How to produce those temporal graphs is explained later in section~\ref{evolution-constr}.
-In general the algorithm uses the clique percolation method to find communities in each temporal graph, and matches the communities of consecutive timesteps.
+The starting point of the algorithm is an undirected and unweighted graph for each timestep.
+The construction of those temporal graphs is explained in section~\ref{evolution-constr}.
+In general, the algorithm uses the clique percolation method to find communities in each temporal graph, and after that matches the communities of consecutive timesteps.
 
 \begin{enumerate}
 \small
@@ -277,58 +281,57 @@ In general the algorithm uses the clique percolation method to find communities 
 			\item Match communities in decending order.
 		\end{itemize}
 	\end{enumerate}
-\item[(3)] Gap filling.
+\item[(3)] Post-processing.
 \end{enumerate}
 
-The following describe the steps (2) and (3) in detail.
-Step (1) was explained in section~\ref{cpm} already.
+The following describes steps (2) and (3) in detail.
+Step (1) was already explained in section~\ref{cpm}.
 
 \subsubsection{Matching Communities}
 \label{evolution-algo-matching}
-For matching communities, the \emph{relative node overlap} $C(A,B)$ between two nodes $A$ and $B$, in a simple way, is defined as follows:
-$$C(A,B) = \frac{ \left| A \cap B\right| }{\left| A \cup B\right|}$$
+For matching communities, the \emph{relative node overlap} $C(A,B)$ between two nodes $A$ and $B$, in a simple way, is defined as
+$$C(A,B) = \frac{ \left| A \cap B\right| }{\left| A \cup B\right|}.$$
 As overlapping communities are allowed the matching from consecutive time steps in descending order of their relative node overlap can lead to missmatching.
 For example when small communities gain a lot of members or vice versa. An example for this problem is given in figure~X [TODO-PIC].
 As a solution, for each time steps $t$ and $t+1$ a joint graph $g_{\cup}$ is constructed, containing all links from both networks.
-Let $D$ be the set of communities at time step $t$ and $E$ the set of communities at time step $t+1$. The set of communities from the joint graph $g_{\cup}$ are extracted using CPM again and are called $V$.
+Let $D$ be the set of communities at time step $t$ and $E$ the set of communities at time step $t+1$. The set of communities from the joint graph $g_{\cup}$ are extracted using CPM and are called $V$.
 For any community $D_i \in D$ or $E_j \in E$ exactly one community $V_k \in V$ can be found.
 For checking weather $E_i$ or $D_j$ is contained in $V_k$ the links are compared instead of nodes.
 For each community $V_i \in V$ the set of communities $D_i^k \in D$ and $E_j^k \in E$ contained in $V_i$ are extracted.
-Now the relative node overlap between every possible pair can be calculated as follows
+Now the relative node overlap between every possible pair can be calculated as with
 $$C^k_{i,j} = \frac{\left| D_i^k \cap E_j^k\right|}{\left| D_i^k\cup E_j^k \right| }$$
 and the pairs can be matched in descending order.
 
-In figures~X three examples are given: figXa is a simple matching of a propagating community, figXb showing two merging communities with one community dying and figXc showning the splitting of a community into two communities with one community is new born.
+In figures~X three examples are given: figXa is a simple matching of a propagating community, figXb showing two merging communities with one community dying and figXc showing the splitting of a community into two communities with one community is born.
 
-\subsubsection{Gap Filling}
+\subsubsection{Post-processing}
 In some cases a community which was disintegrated at a certain time step suddenly reappear in a later timestep, due to low publishing rates for example.
 That means a newborn community includes a formerly dead community.
-This problem is overcome by just fillig the gap with the last step of the almost disintegrated community.
+This problem is overcome by just fillig the gap with the last step of the almost disintegrated community, this is calle gap-filling.
 
-\subsection{Construction of the temporal co-authorship network}
+\subsection{Construction of the temporal co-authorship networks}
 \label{evolution-constr}
-Events in the co-authorship are paper publications.
+Events in the co-authorship network are publications.
 The social connection between people writing a paper together usually starts before the event and last for some time after the event. The higher the fequency the closer the relationship~\cite{ramasco2006social}.
 
-The edge weight resulting from one paper is $n/(n-1)$ with $n$ authors. The \emph{link weight} between to nodes $a$ and $b$ at a certain time $t$ is calculated as
+The edge weight resulting from one paper is $n/(n-1)$ with $n$ as thr number of authors. The edge weight between to nodes $a$ and $b$ at a certain time $t$ is calculated as
 
-$$w_{a,b}(t)= \sum_{i}^{} w_i e^{\frac{-\lambda \left|t-t_i\right|}{w_i}}$$
+$$w_{a,b}(t)= \sum_{i}^{} w_i e^{\frac{-\lambda \left|t-t_i\right|}{w_i}}.$$
 
-The summation runs over all collaboration event in which $a$ and $b$ are involved. The event $i$ occurs at time $t_i$ and the corresponding edge weight at this time is called $w_i$. This function which is a decay functions kind of models the strenght of collaboration between authors over time considering all event ever occured in time.
+The summation runs over all collaboration event in which $a$ and $b$ are involved. The event $i$ occurs at time $t_i$ and the corresponding edge weight at this time is called $w_i$. This decay function models the strenght of collaboration between authors over time considering all events ever occured in time.
 
-A treshhold $w^*$ is used to only include certain edges to the emporal graph. So for each timestep a graph can be constructed based on the collaboration strenght per time step.
+A threshold $w^*$ is used to only include certain edges to the temporal graph. So for each timestep a graph can be constructed based on the collaboration strenght per time step.
 
-The authors of the paper used $w^*=1.0$ for the co-authorship network, they said nothing about $\lambda$ at all. (maybe explain how $w/k$ was chosen?)
+The authors of the paper used $w^*=1.0$ for the co-authorship network.
+No details about $\lambda$ is given in the paper.
 
-The dataset containes 142 month of publications, but I could find in the paper how the data was aggregated, because in the figues it looks like 50 timesteps in total.
+[TODO explain how w and ka are chosen.]
 
-\subsection{Summary of variables an measured statistics}
-\label{evolution-vars}
-For evaluating the quality the overall coverage of the community structure (ratio of nodes contained in at least one community) is measured. Also the distribution of community size is measured.
+The data set used in the paper contained 142 month of publications. Details about data aggregation are not given, but looking at the figures it looks like 50 timeslices.
 
 \subsection{Main Findings of the paper}
 \label{evolution-findings}
-The paper summarized differences between large and small communities and their development over time. Small communities live longer if the members stay the same over time. If members in small communities change frequently, they only live for a short time. Large communities live longer if members are changed permanently, if members stay the same they die quickly.
+The paper summarized differences between large and small communities and their development over time. Small communities live longer if their members stay the same over time. If members in small communities change frequently, they only live for a short time. Large communities live longer if members are changed permanently, if members stay the same they die quickly.
 
 \section{Implications regarding the geochemistry dataset}
 This part describe the steps I would need to undertake to carry out a temporal analysis of communities within the geochemistry dataset or with any other dataset, which forms a collaboration network.
