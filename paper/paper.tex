@@ -14,6 +14,9 @@
 
 \renewcommand*\familydefault{\sfdefault}
 
+\usepackage{xcolor}
+\definecolor{usethiscolorhere}{rgb}{0.85,0.85,0.85}
+
 \begin{document}
 
 \mainmatter  % start of an individual contribution
@@ -160,6 +163,10 @@ A $k$-clique-community is best described by relocating one node until all nodes 
 The starting point for the algorithm is an undirected and unweighted graph. In section \ref{cpm-construction} we talk about generating the  unweighted co-authorship graph.
 Based on the explained community definition the algorithm consists of the following steps:
 
+\noindent
+\colorbox{usethiscolorhere}{
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep}
+
 \begin{enumerate}
 \small
 \item[(1)] Find all maximal cliques.
@@ -169,11 +176,18 @@ Based on the explained community definition the algorithm consists of the follow
 \item[(5)] Post-processing.
 \end{enumerate}
 
+\end{minipage}
+}
+
 \subsubsection{(1) Find all maximal cliques}
 Instead of finding all $k$-cliques, as a first step, the algorithm searches for all maximal cliques. Instead of finding all $k$-cliques, which is a polynomial problem, his can be done in exponential time the authors state.
 Maximal cliques cannot be subsets of larger cliques.
 That is why they are detected in decreasing order of their size.
 The largest possible clique size $s_{max}$ is determinde by the maximal degree $d_{max}$ found in the network.
+
+\noindent
+\colorbox{usethiscolorhere}{
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep}
 
 \begin{enumerate}
 \small
@@ -185,6 +199,9 @@ The largest possible clique size $s_{max}$ is determinde by the maximal degree $
 	\end{enumerate}
 \item[(3)] When no nodes are left set $s=s-1$ and start with (2) on the original graph.
 \end{enumerate}
+
+\end{minipage}
+}
 
 The set of already found cliques do influence the found cliques in later steps, as the later found cliques are smaller.
 The detailed algorithm for step (2.1) finding cliques of size $s$ of $v$ can be looked up in supplementary material to the paper on section 1.1.2, page 3.
@@ -267,6 +284,10 @@ The starting point of the algorithm is an undirected and unweighted graph for ea
 The construction of those temporal graphs is explained in section~\ref{evolution-constr}.
 In general, the algorithm uses the clique percolation method to find communities in each temporal graph, and after that matches the communities of consecutive timesteps.
 
+\noindent
+\colorbox{usethiscolorhere}{
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep}
+
 \begin{enumerate}
 \small
 \item[(1)] Extract communities with CPM for each graph $g_t$ at time step $t$.
@@ -283,6 +304,9 @@ In general, the algorithm uses the clique percolation method to find communities
 	\end{enumerate}
 \item[(3)] Post-processing.
 \end{enumerate}
+
+\end{minipage}
+}
 
 The following describes steps (2) and (3) in detail.
 Step (1) was already explained in section~\ref{cpm}.
@@ -333,6 +357,10 @@ The paper summarized differences between large and small communities and their d
 \section{Implications and Efficiency of the Algorithm}
 This part describe the steps I would need to undertake to carry out a temporal analysis of communities within the geochemistry data set or with any other data set, which forms a collaboration network.
 
+\noindent
+\colorbox{usethiscolorhere}{
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep}
+
 \begin{enumerate}
 \small
 	\item[(1)] Genrate slices of the network for each year.
@@ -343,6 +371,9 @@ This part describe the steps I would need to undertake to carry out a temporal a
 	\item[(6)] Do CPM for each snapshot.
 	\item[(7)] Conduct community mapping.
 \end{enumerate}
+
+\end{minipage}
+}
 
 It is necessary to evaluate the quality of the resulting network after step (1) time slicing, by looking at the basic statistics (number of publications per timeslice, degree distribution, nodes on average per timeslice).
 The function for calculating edge weights (2) could be taken from the paper (see section~\ref{evolution-constr}), but should be followed by checking if the resulting networks after step (3) are still valid.
