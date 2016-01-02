@@ -231,16 +231,16 @@ The remaining elements are set to $1$, resulting in a binary matrix, representin
 \end{figure}
  
 \subsubsection{(4) Each connected component in the clique graph form a $k$-clique-community.}
-In the resulting graph we need to look for connected components, those represent the $k$-clique-communities, see figure~\ref{fig:result}.
+In the resulting graph we need to look for connected components, those represent the $k$-clique-communities, see figure~\ref{fig:final}.
 
 \subsubsection{(5) Post-processing.}
 The last step of the algorithm assigns left over nodes, if possible, to communities. A node which is only connected to one certain community and is not part of a community already is associated with this community. The number of nodes belonging to a community can be increased.
 
 \begin{figure}
 \begin{center}
-	\includegraphics[width=0.8\textwidth]{result}
+	\includegraphics[width=0.8\textwidth]{img/final}
 		\caption{Here the two resulting $k$-clique-communities are shown.}
-		\label{fig:result}
+		\label{fig:final}
 \end{center}
 \end{figure}
 
