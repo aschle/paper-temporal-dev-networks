@@ -50,7 +50,6 @@
 %
 
 \toctitle{Temporal Development of Overlapping Communities in Co-Authorship Networks}
-\tocauthor{Authors' Instructions}
 \maketitle
 
 
@@ -99,7 +98,7 @@ The best known and widely cited is the \emph{clique percolation method (CPM)} by
 There is an implementation provided by the authors, called \emph{CFinder}\footnote{CFinder is a tool which implements the clique percolation method by Palla and finding and visualizing overlapping dense groups of nodes in networks. \url{http://www.cfinder.org/}, 05.12.2015, 22:43}, and an implementation in the R igraph library\footnote{\url{http://igraph.wikidot.com/community-detection-in-r#toc0}, 05.12.2015, 22:45}.
 
 Not only overlapping communities exists in networks, but also communities are structured in an hirarchical way.
-Recent work on algorithms detecting hirachical and overlapping sturctures  include~\cite{1367-2630-11-3-033015}, \cite{Cui201485}, \cite{Shen20091706}.
+Recent work on algorithms detecting hirachical and overlapping sturctures  include~\cite{1367-2630-11-3-033015}, \cite{Cui201485} and~ \cite{Shen20091706}.
 
 Looking at the temporal development of communities ``the main phenomena occurring in the lifetime of a community are: birth, growth, contraction, merger with other communities, split, death''~\cite{fortunato2010community} (see figure~\ref{fig:evolution}).
 The detection of dynamic communities has been studied by Palla et~al.~\cite{palla2007quantifying} using CPM for each snapshot of the graph. Further information on dynamic communities can be found in section 13 of~\cite{fortunato2010community}.
@@ -114,13 +113,13 @@ As CPM is a widely used method for detecting overlapping communities I will expl
 
 \section{Clique Percolation Method}
 \label{cpm}
-The clique percolation method (CPM) developed by Palla et.~al~\cite{palla2007quantifying} is used to identify overlapping communities in unweighted and undirected networks.
+The clique percolation method (CPM) developed by Palla et~al.~\cite{palla2007quantifying} is used to identify overlapping communities in unweighted and undirected networks.
 The authors tested and evaluated their method using a co-authorship network, protein-protein interaction network, word associations network and a network constructed from variables within the source code of an open source ftp programm.
-The following section explains the algorithm and summarizes the main findings of the paper regardin co-authorship networks.
+The following section explains the algorithm and summarizes the main findings of the paper regarding co-authorship networks.
 
-The commmunity definition the algorithm implies, relies on the fact that a community consists of fully connected subgraphs, called \emph{cliques}, that share many nodes.
+The underlying commmunity definition relies on the fact that a community consists of fully connected subgraphs, called \emph{cliques}.
 \emph{$k$-cliques} are fully connected subgraphs with $k$ nodes.
-In figure~\ref{fig:cliques} example of $\{3,4\}$-cliques are given.
+In figure~\ref{fig:cliques} an example of $\{3,4\}$-cliques are given.
 A community, in this context, is called a \emph{$k$-clique-community}, which is defined as a union of all $k$-cliques, which can be reached from each other through a number of \emph{adjacent $k$-cliques}.
 Two $k$-cliques are called adjacent if they share $k-1$ nodes.
 In figure~\ref{fig:rolling} the so called $k$-clique template rolling is visualized for a $3$-clique.
@@ -158,20 +157,19 @@ A $k$-clique-community is best described by relocating one node until all nodes 
 
 \subsection{Algorithm}
 \label{cpm-algo}
-The starting point for the algorithm is a undirected and unweighted graph. In section \ref{cpm-construction} we talk about generating the  unweighted co-authorship graph.
+The starting point for the algorithm is an undirected and unweighted graph. In section \ref{cpm-construction} we talk about generating the  unweighted co-authorship graph.
 Based on the explained community definition the algorithm consists of the following steps:
 
 \begin{enumerate}
 \small
-\item[(1)] Find all \emph{maximal cliques}.
-\item[(2)] Prepare clique-clique overlap matrix (clique graph).
-\item[(3)] Treshold the matrix with a certain $k$.
+\item[(1)] Find all maximal cliques.
+\item[(2)] Prepare clique-clique overlap matrix, or clique graph.
+\item[(3)] Threshold the matrix with a certain $k$.
 \item[(4)] Each connected component in the clique graph form a $k$-clique-community.
 \end{enumerate}
 
 \subsubsection{(1) Find all maximal cliques}
-Instead of finding all $k$-cliques (it is a polynomial problem) as a first step.
-The algorithm searches for all maximal cliques, this can be done in exponential time the authors state.
+Instead of finding all $k$-cliques, as a first step, the algorithm searches for all maximal cliques. Instead of finding all $k$-cliques, which is a polynomial problem, his can be done in exponential time the authors state.
 Maximal cliques cannot be subsets of larger cliques.
 That is why they are detected in decreasing order of their size.
 The largest possible clique size $s_{max}$ is determinde by the maximal degree $d_{max}$ found in the network.
@@ -189,8 +187,7 @@ The largest possible clique size $s_{max}$ is determinde by the maximal degree $
 
 The set of already found cliques do influence the found cliques in later steps, as the later found cliques are smaller.
 The detailed algorithm for step (2.1) finding cliques of size $s$ of $v$ can be looked up in supplemtary material to the paper on section 1.1.2, page 3.
-The result of this step is a set of all maximal cliques, an example can be seen in figure~\ref{fig:3clique}.
-This set contains $n_c$ cliques.
+The result of this step is a set with size $n_c$ of all maximal cliques, an example can be seen in figure~\ref{fig:3clique}.
 
 \begin{figure}
 \begin{center}
@@ -200,12 +197,12 @@ This set contains $n_c$ cliques.
 \end{center}
 \end{figure}
 
-\subsubsection{(2) Prepare clique-clique overlap matrix (clique graph)}
+\subsubsection{(2) Prepare clique-clique overlap matrix, or clique graph}
 The dimension of the overlap matrix is $n_c \times n_c$. Each row and column represent a clique.
 All non-diagonal matrix elements represent the number of nodes those cliques share.
 The diagonal entries represent the size of the corresponding clique.
 This matrix is only generated once.
-In figure~\ref{fig:matrix} the clique-clique overlap matrix of graph in figure~\ref{fig:allmaxcliques} and the coressponding clique graph is shown.
+In figure~\ref{fig:matrix} the clique-clique overlap matrix of the graph of figure~\ref{fig:allmaxcliques} and the coressponding clique graph is shown.
 
 \begin{figure}
 \begin{center}
@@ -216,20 +213,20 @@ In figure~\ref{fig:matrix} the clique-clique overlap matrix of graph in figure~\
 \end{figure}
 
 
-\subsubsection{(3) Treshold the matrix}
+\subsubsection{(3) Threshold the matrix}
 All off-diagonal entries smaller than $k-1$ and diagonal entries smaller than $k$ are set to $0$.
-The remaining elements are set to $1$, resulting in a binary matrix, representing a network of cliques. The tresholding can be done repeatedly without calculating a new matrix. See figure~\ref{fig:matrixtrashed}.
+The remaining elements are set to $1$, resulting in a binary matrix, representing a network of cliques. The thresholding can be done repeatedly without calculating a new matrix, see figure~\ref{fig:matrixtrashed}.
 
 \begin{figure}
 \begin{center}
 	\includegraphics[width=0.8\textwidth]{matrixtrashed}
-		\caption{This is the resulting clique graph after the treshholding with $k=4$. All connected components do represent a $k$-clique-community. There are only two communities.}
+		\caption{This is the resulting clique graph after the thresholding with $k=4$. All connected components do represent a $k$-clique-community. In this example are two communities.}
 		\label{fig:matrixtrashed}
 \end{center}
 \end{figure}
  
-\subsubsection{(4) All connected components represent a community}
-In the resulting graph we just need to look for connected components, those represent the $k$-clique-communities. See figure~\ref{fig:result}.
+\subsubsection{(4) Each connected component in the clique graph form a $k$-clique-community.}
+In the resulting graph we need to look for connected components, those represent the $k$-clique-communities, see figure~\ref{fig:result}.
 
 \begin{figure}
 \begin{center}
@@ -240,32 +237,18 @@ In the resulting graph we just need to look for connected components, those repr
 \end{figure}
 
 
-
-\subsection{Construction of the co-authorship and choosing the right $k$ and trashold.}
+\subsection{Construction of the co-authorship network, choosing $k$ and threshold $w^*$.}
 \label{cpm-construction}
-The edge weights are calculated with $n/(n-1)$ with $n$ as number of auther per publication.
-This results in modeling the collaboration between fewer authors as more intensive that looking at a higher number of authors.  
-To generate an unweighted network all edges need to be removed under a certain treshold $w^*$, all others are replaced by weight $1$. Increasing $w^*$ results in fewer edges throughout the network, but stronger links and fewer detected communities.
+The edge weights are calculated with $$\frac{n}{n-1}$$ with $n$ beeing the number of authers per publication.
+This results in modeling the collaboration between fewer authors as more intensive than the collaboration between a higher number of authors.  
+To generate an unweighted network all edges with an edgeweight below a certain threshold $w^*$ need to be removed, all others edgweights are replaced by weight $1$. Increasing $w^*$ results in fewer edges throughout the network, but stronger links and fewer detected communities.
 
-In addition a good $k$ needs to be chosen. As $k$ is increased the detected $k$-clique-communities shrink, but at the same time become more cohesive (stronger connected).
-
+In addition a good $k$ needs to be chosen. When $k$ is increased the detected $k$-clique-communities shrink, but at the same time become more cohesive (stronger connected).
 So a good balance between $k$ and $w^*$ needs to be found resulting in a community structure which is highly structured.
 
-The authors state that $k$ is usually betweem between $3$ and $6$.
+The authors state that $k$ is usually between $3$ and $6$.
 If the number of links in a network are increased above some point a giant component evolves and covers the underlying community structure.
 So for each $k$ the treshold $w^*$ is lowered until the larges component becomes twice as big as the second largest component. For really choosing the best $k$ some further characteristics describing the community structure need to be investigated, see Supplementary Information of~\cite{palla2005uncovering} for more details.
-
-\subsection{Summary of measured statistics}
-A node $i$ of a network has the following characteristics:
-
-\begin{description}
-	\item[membership number \textbf{$m_i$}] \dots number of communities the node belongs to
-	\item[overlap size $s^\texttt{ov}_{\alpha,\beta}$] \dots between two communities $\alpha$ and $\beta$
-	\item[community degree $d_{\alpha}^\texttt{com}$] \dots number of links a community $\alpha$ has
-	\item[community size $s_{\alpha}^\texttt{com}$] \dots number of nodes belonging to community $\alpha$
-\end{description}
-
-The distributions of all characteristics are measured and analysed.
 
 \subsection{Main Findings of the paper}
 Overlaps in networks are significant. The distributions introduced in the paper (community size, community degree, overlap size, membership number) reveal universal features of networks. The network of communities has non-trivial correlations and specific scaling properties.~\cite{palla2005uncovering}
