@@ -4,8 +4,7 @@
 \setcounter{tocdepth}{3}
 
 \usepackage{graphicx}
-\usepackage{subcaption}
-\usepackage{caption}
+
 \usepackage{url}
 
 \urldef{\mailsa}\path|alexa.schlegel@gmail.com|
@@ -107,8 +106,8 @@ Looking at the temporal development of communities ``the main phenomena occurrin
 The detection of dynamic communities has been studied by Palla et~al.~\cite{palla2007quantifying} using CPM for each snapshot of the graph. Further information on dynamic communities can be found in section 13 of~\cite{fortunato2010community}.
 
 \begin{figure}
-	\includegraphics[width=\textwidth]{villsize.jpg}
-	\caption{lifetime of a community}
+	\includegraphics[width=\textwidth]{img/fullSizeEvolution.jpg}
+	\caption{Lifetime of a community, from~[9]}
 	\label{fig:evolution}
 \end{figure}
 
@@ -129,31 +128,13 @@ In figure~\ref{fig:rolling} the so called $k$-clique template rolling is visuali
 A $k$-clique-community is best described by relocating one node until all nodes of the community are discovered.
 
 \begin{figure}
-    \centering
-    \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{3-clique}
-        \caption{3-cliquel}
-        \label{fig:3clique}
-    \end{subfigure}
-    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
-      %(or a blank line to force the subfigure onto a new line)
-    \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{4-clique}
-        \caption{4-clique}
-        \label{fig:4clique}
-    \end{subfigure}
-    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
-    %(or a blank line to force the subfigure onto a new line)
-    \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{cliqueinside}
-        \caption{4-clique inside a graph}
-        \label{fig:cliqueInside}
-    \end{subfigure}
-    \caption{Examle of cliques}\label{fig:cliques}
+	\includegraphics[width=\textwidth]{img/cliques.png}
+    \caption{Examples for a $3$-clique, $4$-clique and a $4$-clique inside a graph.}
+    \label{fig:cliques}
 \end{figure}
 
 \begin{figure}
-	\includegraphics[width=\textwidth]{rolling.png}
+	\includegraphics[width=\textwidth]{img/rolling.png}
 	\caption{Template rolling for a $3$-clique}
 	\label{fig:rolling}
 \end{figure}
@@ -162,6 +143,8 @@ A $k$-clique-community is best described by relocating one node until all nodes 
 \label{cpm-algo}
 The starting point for the algorithm is an undirected and unweighted graph. In section \ref{cpm-construction} we talk about generating the  unweighted co-authorship graph.
 Based on the explained community definition the algorithm consists of the following steps:
+
+\medskip
 
 \noindent
 \colorbox{usethiscolorhere}{
@@ -183,7 +166,9 @@ Based on the explained community definition the algorithm consists of the follow
 Instead of finding all $k$-cliques, as a first step, the algorithm searches for all maximal cliques. Instead of finding all $k$-cliques, which is a polynomial problem, his can be done in exponential time the authors state.
 Maximal cliques cannot be subsets of larger cliques.
 That is why they are detected in decreasing order of their size.
-The largest possible clique size $s_{max}$ is determinde by the maximal degree $d_{max}$ found in the network.
+The largest possible clique size $s_{max}$ is determinde by the maximal degree $d_{max}$ found in the network. The following steps describe the algorithm for finding maximal cliques:
+
+\medskip
 
 \noindent
 \colorbox{usethiscolorhere}{
@@ -203,14 +188,16 @@ The largest possible clique size $s_{max}$ is determinde by the maximal degree $
 \end{minipage}
 }
 
+\medskip
+
 The set of already found cliques do influence the found cliques in later steps, as the later found cliques are smaller.
 The detailed algorithm for step (2.1) finding cliques of size $s$ of $v$ can be looked up in supplementary material to the paper on section 1.1.2, page 3.
-The result of this step is a set with size $n_c$ of all maximal cliques, an example can be seen in figure~\ref{fig:3clique}.
+The result of this step is a set of size $n_c$ containing all maximal cliques, an example can be seen in figure~\ref{fig:allmaxcliques}.
 
 \begin{figure}
 \begin{center}
-	\includegraphics[width=0.8\textwidth]{allmaxcliques.png}
-		\caption{All maximal cliques in a graph. Each color represents a maximal clique.}
+	\includegraphics[width=0.8\textwidth]{img/allmaxcliques.png}
+		\caption{All maximal cliques in a graph. Each color represents a maximal clique. Adapted from~[9].}
 		\label{fig:allmaxcliques}
 \end{center}
 \end{figure}
@@ -224,7 +211,7 @@ In figure~\ref{fig:matrix} the clique-clique overlap matrix of the graph of figu
 
 \begin{figure}
 \begin{center}
-	\includegraphics[width=0.8\textwidth]{matrix.png}
+	\includegraphics[width=0.8\textwidth]{img/matrix.png}
 		\caption{The clique-clique overlap matrix and the corresponding clique graph. The number inside the node is the number of nodes belonging to that community, the width of the edge represents the shared nodes.}
 		\label{fig:matrix}
 \end{center}		
@@ -237,8 +224,8 @@ The remaining elements are set to $1$, resulting in a binary matrix, representin
 
 \begin{figure}
 \begin{center}
-	\includegraphics[width=0.8\textwidth]{matrixtrashed}
-		\caption{This is the resulting clique graph after the thresholding with $k=4$. All connected components do represent a $k$-clique-community. In this example are two communities.}
+	\includegraphics[width=0.8\textwidth]{img/matrixtrashed}
+		\caption{This is the resulting clique graph after thresholding with $k=4$. All connected components do represent a $k$-clique-community. In this example two communities exist.}
 		\label{fig:matrixtrashed}
 \end{center}
 \end{figure}
@@ -258,7 +245,7 @@ The last step of the algorithm assigns left over nodes, if possible, to communit
 \end{figure}
 
 
-\subsection{Construction of the co-authorship network}
+\subsection{Construction of the Co-Authorship Network}
 \label{cpm-construction}
 The edge weights are calculated with $$\frac{n}{n-1}$$ with $n$ beeing the number of authors per publication.
 This results in modeling the collaboration between fewer authors as more intensive than the collaboration between a higher number of authors.  
@@ -271,7 +258,7 @@ The authors state that $k$ is usually between $3$ and $6$.
 If the number of links in a network is increased above some point a giant component evolves and covers the underlying community structure.
 So for each $k$ the threshold $w^*$ is lowered until the largest component becomes twice as big as the second largest component. For really choosing the best $k$ some further characteristics describing the community structure need to be investigated, see Supplementary Information of~\cite{palla2005uncovering} for more details.
 
-\subsection{Main Findings of the paper}
+\subsection{Main Findings of the Paper}
 Overlaps in networks are significant. The distributions introduced in the paper (community size, community degree, overlap size, membership number) reveal universal features of networks. The network of communities has non-trivial correlations and specific scaling properties.~\cite{palla2005uncovering}
 
 \section{Community Evolution}
@@ -283,6 +270,8 @@ Palla et~al.~\cite{palla2007quantifying} developed an algorithm based on clique 
 The starting point of the algorithm is an undirected and unweighted graph for each timestep.
 The construction of those temporal graphs is explained in section~\ref{evolution-constr}.
 In general, the algorithm uses the clique percolation method to find communities in each temporal graph, and after that matches the communities of consecutive timesteps.
+
+\medskip
 
 \noindent
 \colorbox{usethiscolorhere}{
@@ -308,7 +297,9 @@ In general, the algorithm uses the clique percolation method to find communities
 \end{minipage}
 }
 
-The following describes steps (2) and (3) in detail.
+\medskip
+
+The following describes steps (2) Matching Communities and (3) Post-Processing in detail.
 Step (1) was already explained in section~\ref{cpm}.
 
 \subsubsection{Matching Communities}
@@ -316,24 +307,30 @@ Step (1) was already explained in section~\ref{cpm}.
 For matching communities, the \emph{relative node overlap} $C(A,B)$ between two nodes $A$ and $B$, in a simple way, is defined as
 $$C(A,B) = \frac{ \left| A \cap B\right| }{\left| A \cup B\right|}.$$
 As overlapping communities are allowed the matching from consecutive time steps in descending order of their relative node overlap can lead to mismatching.
-For example, when small communities gain a lot of members or vice versa. An example for this problem is given in figure~X [TODO-PIC].
+For example, when small communities gain a lot of members or vice versa. An example for this problem is given in figure~\ref{fig:mismatch}.
 As a solution, for each time steps $t$ and $t+1$ a joint graph $g_{\cup}$ is constructed, containing all links from both networks.
 Let $D$ be the set of communities at time step $t$ and $E$ the set of communities at time step $t+1$. The set of communities from the joint graph $g_{\cup}$ are extracted using CPM and are called $V$.
 For any community $D_i \in D$ or $E_j \in E$ exactly one community $V_k \in V$ can be found.
 For checking whether $E_i$ or $D_j$ is contained in $V_k$ the links are compared instead of nodes.
 For each community $V_i \in V$ the set of communities $D_i^k \in D$ and $E_j^k \in E$ contained in $V_i$ are extracted.
-Now the relative node overlap between every possible pair can be calculated as with
+Now the relative node overlap between every possible pair can be calculated with
 $$C^k_{i,j} = \frac{\left| D_i^k \cap E_j^k\right|}{\left| D_i^k\cup E_j^k \right| }$$
 and the pairs can be matched in descending order.
 
-In figures~X three examples are given: figXa is a simple matching of a propagating community, figXb showing two merging communities with one community dying and figXc showing the splitting of a community into two communities with one community is born.
+\begin{figure}
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{img/mismatch.png}
+		\caption{Example for mismatching communities in consecutive timesteps. $A$(green) and $B$(blue) are two communities, red nodes belong to both communities. The overlap between $A_t$ and $B_{t+1}$ is bigger than between $A_t$ and $A_{t+1}$}.
+		\label{fig:mismatch}
+\end{center}
+\end{figure}
 
-\subsubsection{Post-processing}
+\subsubsection{Post-Processing}
 In some cases, a community which was disintegrated at a certain time step suddenly reappears in a later timestep, due to low publishing rates for example.
 That means a newborn community includes a formerly dead community.
 This problem is overcome by just filling the gap with the last step of the almost disintegrated community, this is called gap-filling.
 
-\subsection{Construction of the temporal co-authorship networks}
+\subsection{Construction of the Temporal Co-Authorship Networks}
 \label{evolution-constr}
 Events in the co-authorship network are publications.
 The social connection between people writing a paper together usually starts before the event and last for some time after the event. The higher the frequency the closer the relationship~\cite{ramasco2006social}.
@@ -350,12 +347,14 @@ The authors of the paper used $w^*=1.0$ for the co-authorship network.
 No details about $\lambda$ is given in the paper.
 The dataset used in the paper contained 142 months of publications. Details about data aggregation are not given, but looking at the figures it looks like 50 timeslices.
 
-\subsection{Main Findings of the paper}
+\subsection{Main Findings of the Paper}
 \label{evolution-findings}
 The paper summarized differences between large and small communities and their development over time. Small communities live longer if their members stay the same over time. If members in small communities change frequently, they only live for a short time. Large communities live longer if members are changed permanently if members stay the same they die quickly.
 
 \section{Implications and Efficiency of the Algorithm}
 This part describe the steps I would need to undertake to carry out a temporal analysis of communities within the geochemistry data set or with any other data set, which forms a collaboration network.
+
+\medskip
 
 \noindent
 \colorbox{usethiscolorhere}{
@@ -375,9 +374,11 @@ This part describe the steps I would need to undertake to carry out a temporal a
 \end{minipage}
 }
 
+\medskip
+
 It is necessary to evaluate the quality of the resulting network after step (1) time slicing, by looking at the basic statistics (number of publications per timeslice, degree distribution, nodes on average per timeslice).
 The function for calculating edge weights (2) could be taken from the paper (see section~\ref{evolution-constr}), but should be followed by checking if the resulting networks after step (3) are still valid.
-For finding the right $k$ (4) and $w^*$ (5) and extended analysis of network characteristics like coverage of community structure and distribution if community size (see~\ref{evolution-vars}) would need to be carried out.
+For finding the right $k$ (4) and $w^*$ (5) and extended analysis of network characteristics like coverage of community structure and distribution if community size would need to be carried out.
 Also, the quality of the detected communities would need evaluation, comparing density within the community to outside the community.
 For step (1) CFinder or R could be used.
 It is open to me if there is an implementation for the community mapping (7), if not this step would need to be implemented.
