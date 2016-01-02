@@ -324,17 +324,14 @@ A threshold $w^*$ is used to only include certain edges to the temporal graph. S
 
 The authors of the paper used $w^*=1.0$ for the co-authorship network.
 No details about $\lambda$ is given in the paper.
-
-[TODO explain how w and ka are chosen.]
-
 The data set used in the paper contained 142 month of publications. Details about data aggregation are not given, but looking at the figures it looks like 50 timeslices.
 
 \subsection{Main Findings of the paper}
 \label{evolution-findings}
 The paper summarized differences between large and small communities and their development over time. Small communities live longer if their members stay the same over time. If members in small communities change frequently, they only live for a short time. Large communities live longer if members are changed permanently, if members stay the same they die quickly.
 
-\section{Implications regarding the geochemistry dataset}
-This part describe the steps I would need to undertake to carry out a temporal analysis of communities within the geochemistry dataset or with any other dataset, which forms a collaboration network.
+\section{Implications and Efficiency of the Algorithm}
+This part describe the steps I would need to undertake to carry out a temporal analysis of communities within the geochemistry data set or with any other data set, which forms a collaboration network.
 
 \begin{enumerate}
 \small
@@ -347,13 +344,20 @@ This part describe the steps I would need to undertake to carry out a temporal a
 	\item[(7)] Conduct community mapping.
 \end{enumerate}
 
-It is also important to look at basic statistics after (1) timeslicing. For example to look at how many publications per timeslice, degree distributions, nodes on average per timeslice to check of timeslincing was done right or needs to be adjusted.
-The function for calculating edge weights (2) could be used from the paper (see section~\ref{evolution-constr}), but it would need to be checked if the resulting networks (3) are still valid.
-For findng the right $k$ (4) and $w^*$ (5) and extended analysis of network caracteristics like coverage of community structure and distribution if community size (see~\ref{evolution-vars}) would need to be carried out. Also the quality of the detected communities would need evaluation, comparing density within the community to outside the community. Using CFinder or R for CMP (6) detection. It is open to me if there is an implementation for the community mapping (7), if not I would neet to implement it.
-Time complexity will be no problem because my dataset is not very big. About 2.000 paper resulting in about 500 nodes.
+It is nessesary to evaluate the quality of the resulting network after step (1) timeslicing, by looking at the basic statistics (number of publications per per timeslice, degree distribution, nodes on average per timeslice).
+The function for calculating edge weights (2) could be taken from the paper (see section~\ref{evolution-constr}), but should be followed by checking if the resulting networks after step (3) are still valid.
+For finding the right $k$ (4) and $w^*$ (5) and extended analysis of network caracteristics like coverage of community structure and distribution if community size (see~\ref{evolution-vars}) would need to be carried out.
+Also the quality of the detected communities would need evaluation, comparing density within the community to outside the community.
+For step (1) CFinder or R could be used.
+It is open to me if there is an implementation for the community mapping (7), if not this step would need to be implemented.
+
+Determination of all cliques within a graph is a non-polynomial problem.
+The authos state that the required CPU time depends strongly on the structure of the input data, so no closed formula to estimate the system size depenance can be given.
+A complete CPM analysis for a co-authorship networl with $127.000$ links takes less than 2 hours on a PC\footnote{No details about the PC are given in the paper.}.
+I assume time complexity will not be a problem because my dataset contains $18.404$ eges in total, when not applying any threshold.
 
 \section{Future Work}
-As this paper dicusses only one method an extensive literature research should follow, finding out more methods for that problem. Also a closer look on recent work would be good. The results from this dataset should be compared to the results of Palla. Maybe some time should be invested for finding a good representation for edge weights calculation, related to collaboration definition. The visuaization of the community evolution remains open and would be a broad topic, but exciting to investigate further.
+As this paper dicusses only one popular method, an extensive literature research should follow, finding out more methods solving the problem. Also a closer look at more recent work would be nesessary. It would be also interesting to find a good model for calculating edge weights with respect to scientific collaboration definitions. The visuaization of the community evolution remains open and would be a broad topic, but exciting to investigate further.
 
 {
 	\bibliographystyle{plain}
